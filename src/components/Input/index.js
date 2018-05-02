@@ -32,9 +32,8 @@ export default class Input extends React.Component {
         onBlur && onBlur(name,e.target.value);
     }
     componentDidMount(){
-        if(this.unitNode){
-            this.inputNode.style.paddingRight = this.unitNode.style.width;
-        }
+        const {name} = this.props;
+        console.log(document.querySelectorAll(`.input-component input[name=${name}]`)[0].width);
     }
     render() {
         const {name, value, disabled, error, unit, type, placeholder} = this.props;
@@ -44,10 +43,10 @@ export default class Input extends React.Component {
                    type={type}
                    onChange={this.inputChange}
                    onBlur={this.inputBlur}
+                   disabled={disabled}
                    placeholder={placeholder}
-                   ref={(val)=>this.inputNode = val}
             />
-            { unit && <span className='unit' ref={(val)=>this.unitNode=val}>{unit}</span>}
+            { unit && <span className='unit' ref={(val)=>this.unitNode = val}>{unit}</span>}
         </div>
     }
 }

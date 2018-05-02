@@ -39,5 +39,5 @@ app.get('*', (req, res) => {
     })
 });
 app.listen(config.port,()=>{
-    console.log(`listening port ${config.port}`)
+    console.log(`listening http://localhost:${config.port}`)
 });

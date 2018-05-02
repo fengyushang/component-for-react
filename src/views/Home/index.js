@@ -18,8 +18,7 @@ export default class Home extends React.Component {
                        value={input1}
                        onChange={(name,value)=>this.setState({input1: value})}
                        placeholder='提示信息'
-                       disabled={true}
-                       unit='元'
+                       unit='美元'
                 />
             </div>
             </div>
