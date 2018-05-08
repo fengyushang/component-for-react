@@ -8,10 +8,12 @@ import './style.less';
 export default class Home extends React.Component {
     state = {
         input1: 123,
+        total: 112,
+        current: 1,
     };
 
     render() {
-        const {input1} = this.state;
+        const {input1,total,current} = this.state;
         return <div className='home-page'>
             <div className='rightContent'>
                 <Button text="确定"/>
@@ -25,7 +27,16 @@ export default class Home extends React.Component {
                 />
             </div>
             <div>
-                <Pagination pageSize={10} total={112} current={1} />
+                <Pagination total={total}
+                            current={current}
+                            onChange={(pageSize,pageNum)=>this.setState({current:pageNum})}
+                            config={{
+                                first: '首页',
+                                last: '尾页',
+                                prev: '上一页',
+                                next: '下一页',
+                            }}
+                            border={false}/>
             </div>
         </div>
     }

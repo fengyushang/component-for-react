@@ -1,8 +1,11 @@
 import React from 'react';
 import propTypes from 'proptypes';
+import Input from '../Input';
+import {autobind} from 'core-decorators';
 import '../style/pagination.less';
 
 const step = 5;
+@autobind
 export default class Pagination extends React.Component {
     static props = {
         pageSize: propTypes.number.isRequired,//每页显示条数
@@ -10,15 +13,47 @@ export default class Pagination extends React.Component {
         current: propTypes.number.isRequired,//当前页码
         hideOnSinglePage: propTypes.bool,//只有一页时是否隐藏分页器
         onChange: propTypes.func.isRequired,//页码改变的回调
+        config: propTypes.object,//相关文字信息，首页，上一页，尾页，下一页，跳转至
+        showQuickJump: propTypes.bool,//是否显示快速跳转至多少页
     };
     static defaultProps = {
         pageSize: 10,
         total: 0,
         current: 1,
+        config: {},
+        showQuickJump: true,
     };
-
+    state = {
+        jumpValue: '',
+        config: {
+            jumpTo: '跳转至',
+        }
+    };
+    componentDidMount(){
+        document.addEventListener('keydown',(e)=>{
+            if(event.keyCode == 13){
+                const {pageSize,total,onChange} = this.props;
+                const {jumpValue} = this.state;
+                if(jumpValue>0 && jumpValue<=(Math.ceil(total / pageSize))){
+                    onChange(pageSize,parseInt(jumpValue))
+                }
+            }
+        })
+    }
+    quickJump(name,value){
+        const {pageSize,total,onChange} = this.props;
+        if(value>0 && value<=(Math.ceil(total / pageSize))){
+            onChange(pageSize,parseInt(value))
+        }
+    }
+    jumpValueChange(name,value){
+        this.setState({jumpValue: parseInt(value)});
+    }
     render() {
-        const {pageSize, total, current, hideOnSinglePage, onChange} = this.props;
+        const {pageSize, total, current, hideOnSinglePage, onChange, config, showQuickJump} = this.props;
+        const {jumpValue} = this.state;
+        const newConfig = Object.assign(this.state.config,config);
+        const {first,last,prev,next,jumpTo} = newConfig;
         const pageNum = Math.ceil(total / pageSize);
         let pages = [];
         let left = false;
@@ -54,28 +89,40 @@ export default class Pagination extends React.Component {
 
         return <div className='pagination-component' style={(hideOnSinglePage && pageNum === 1) ? {display: 'none'} : {}}>
             <ul className='pagination-list'>
-                <li className={current<=1 ? 'disabled':''} onClick={this.goFirst}>&lt;&lt;</li>
-                <li className={current<=1 ? 'disabled':''} onClick={this.goLeft}>&lt;</li>
+                <li className={current<=1 ? 'disabled':''} onClick={()=>current>1 && onChange(pageSize,1)}>
+                    {first || <span>&lt;&lt;</span>}
+                </li>
+                <li className={current<=1 ? 'disabled':''} onClick={()=>current>1 && onChange(pageSize,current-1)}>
+                    {prev || <span>&lt;</span>}
+                </li>
                 {
-                    total > 0 && <li>1</li>
+                    total > 0 && <li className={current===1 ? 'active':''} onClick={()=>onChange(pageSize,1)}>1</li>
                 }
                 {
-                    left && <li>...</li>
+                    left && <li title={`previous ${step} pages`} className='jump-prev' onClick={()=>onChange(pageSize,current-step>1 ? current-step : 1)}>· · ·</li>
                 }
                 {
                     pages.map((item, key) => {
-                        return <li key={key}>{item}</li>
+                        return <li key={key} className={current===item ? 'active':''} onClick={()=>onChange(pageSize,item)}>{item}</li>
                     })
                 }
                 {
-                    right && <li>...</li>
+                    right && <li title={`next ${step} pages`} className='jump-next' onClick={()=>onChange(pageSize,current+step>pageNum ? pageNum : current+step)}>· · ·</li>
                 }
                 {
-                    pageNum >= 2 && <li>{pageNum}</li>
+                    pageNum >= 2 && <li className={current===pageNum ? 'active':''} onClick={()=>onChange(pageSize,pageNum)}>{pageNum}</li>
                 }
-                <li className={current>=pageNum ? 'disabled':''} onClick={this.goRight}>&gt;</li>
-                <li className={current>=pageNum ? 'disabled':''} onClick={()=>current<pageNum && onChange(pageSize)}>&gt;&gt;</li>
+                <li className={current>=pageNum ? 'disabled':''} onClick={()=>current<pageNum && onChange(pageSize,current+1)}>
+                    {next || <span>&gt;</span>}
+                </li>
+                <li className={current>=pageNum ? 'disabled':''} onClick={()=>current<pageNum && onChange(pageSize,pageNum)}>
+                    {last || <span>&gt;&gt;</span>}
+                </li>
             </ul>
+            <div className='quick-jump'>
+                <span>{jumpTo}</span>
+                <Input name='jumpTo' value={jumpValue} type='number' onChange={this.jumpValueChange} onBlur={this.quickJump}/>
+            </div>
         </div>
     }
 }
