@@ -1,0 +1,29 @@
+@import '../style/size';
+@import '../style/color';
+.pagination-component{
+  ul.pagination-list{
+    li{
+      display: inline-block;
+      cursor: pointer;
+      border-radius: @pagination-border-radius;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      min-width: @pagination-page-size;
+      text-align: center;
+      list-style: none;
+      border: 1px solid @pagination-border-color-default;
+      background-color: @white-color;
+      outline: 0;
+      vertical-align: middle;
+      height: @pagination-page-size;
+      line-height: @pagination-page-size - 2px;
+      margin-right: @pagination-page-margin-right;
+      &.disabled{
+        cursor: not-allowed;
+        color: rgba(0,0,0,.4);
+      }
+    }
+  }
+}

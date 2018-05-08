@@ -2,9 +2,9 @@
 @import './color';
 .input-component{
   font-size: 12px;
-  position: relative;
+  display: flex;
   input{
-    width: 100%;
+    flex: 1;
     height: @input-height;
     border: 1px solid @input-default-border;
     outline: none;
@@ -12,7 +12,7 @@
     &:focus{
       border-color: @input-edit-border;
     }
-    &:disabled{
+    &:disabled,&:disabled + .unit{
       background-color: @input-readonly-bac;
       color: @input-readonly-font;
     }
@@ -24,12 +24,9 @@
     }
   }
   .unit{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    line-height: @input-height;
     padding: 0 6px;
-    background-color: @white-color;
+    border: 1px solid @input-default-border;
+    border-left: none;
+    line-height: @input-height - 2;
   }
 }
