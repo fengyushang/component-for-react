@@ -4,4 +4,37 @@
 .btn{
     display: inline-block;
     height:32px;
+    width:96px;
+    border-radius: 5px;
+    border:0;
+    color:@white-color;
+    cursor: pointer;
+    &[disabled]{
+        cursor: no-drop;
+    }
+    outline: 0;
+}
+.sureBtn{
+    background-color: @blue-button-bac;
+    &:hover{
+        background-color:@blue-button-bac-hover;
+    }
+    &:active{
+        background-color: @blue-button-bac-click;
+    }
+    &[disabled]{
+        background-color: @blue-button-bac-undo;
+    }
+}
+.cancelBtn{
+    background-color: @grey-button-bac;
+    &:hover{
+        background-color: @grey-button-bac-hover;
+    }
+    &:active{
+        background-color: @grey-button-bac-click;
+    }
+    &[disabled]{
+        background-color: @grey-button-bac-undo;
+    }
 }
