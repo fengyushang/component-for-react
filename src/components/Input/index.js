@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'proptypes';
+import propTypes from 'prop-types';
 import {autobind} from 'core-decorators';
 import '../style/input.less';
 

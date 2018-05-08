@@ -15,9 +15,12 @@ export default class Home extends React.Component {
     render() {
         const {input1,total,current} = this.state;
         return <div className='home-page'>
-            <div className='rightContent'>
-                <Button text="确定"/>
-            </div>
+                <div className='rightContent'>
+                    <Button text="确定" sureBtn/>
+                    <Button text="禁止" sureBtn disabled/>
+                    <Button text="取消" cancelBtn/>
+                    <Button text="禁止" cancelBtn disabled/>
+                </div>
             <div>
                 <Input name='input1'
                        value={input1}
