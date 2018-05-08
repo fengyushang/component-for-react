@@ -18,7 +18,6 @@ class Button extends Component {
         text:'button',
         type:'button',
         className:'btn',
-        // sureBtn:true
     };
 
     render(){
