@@ -4,7 +4,7 @@
 <Pagination onChange={onChange} total={50} pageSize={10}/>
 ```
 
-| 参数 | 说明 | 类型 | 默认值 | 是否必须 |
+| 参数 | 说明 | 类型 | 默认值 | 必需 |
 | --- | --- | --- | --- | --- |
 | pageSize | 每页条数 | number | 10 | 否 |
 | current | 当前页数 | number | 1 | 否 |
