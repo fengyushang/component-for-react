@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import {autobind} from 'core-decorators';
-import '../style/input.less';
+import './input.less';
 
 @autobind
 export default class Input extends React.Component {
@@ -32,8 +32,7 @@ export default class Input extends React.Component {
         onBlur && onBlur(name,e.target.value);
     }
     componentDidMount(){
-        const {name} = this.props;
-        console.log(document.querySelectorAll(`.input-component input[name=${name}]`)[0].width);
+
     }
     render() {
         const {name, value, disabled, error, unit, type, placeholder} = this.props;

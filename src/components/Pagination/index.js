@@ -1,16 +1,17 @@
 import React from 'react';
 import propTypes from 'proptypes';
 import Input from '../Input';
+import IconFont from '../IconFont';
 import {autobind} from 'core-decorators';
-import '../style/pagination.less';
+import './pagination.less';
 
 const step = 5;
 @autobind
 export default class Pagination extends React.Component {
     static props = {
-        pageSize: propTypes.number.isRequired,//每页显示条数
-        total: propTypes.number.isRequired,//数据总条数
-        current: propTypes.number.isRequired,//当前页码
+        pageSize: propTypes.number,//每页显示条数
+        total: propTypes.number,//数据总条数
+        current: propTypes.number,//当前页码
         hideOnSinglePage: propTypes.bool,//只有一页时是否隐藏分页器
         onChange: propTypes.func.isRequired,//页码改变的回调
         config: propTypes.object,//相关文字信息，首页，上一页，尾页，下一页，跳转至
@@ -22,6 +23,7 @@ export default class Pagination extends React.Component {
         current: 1,
         config: {},
         showQuickJump: true,
+        hideOnSinglePage: false,
     };
     state = {
         jumpValue: '',
@@ -30,24 +32,29 @@ export default class Pagination extends React.Component {
         }
     };
     componentDidMount(){
-        document.addEventListener('keydown',(e)=>{
-            if(event.keyCode == 13){
-                const {pageSize,total,onChange} = this.props;
-                const {jumpValue} = this.state;
-                if(jumpValue>0 && jumpValue<=(Math.ceil(total / pageSize))){
-                    onChange(pageSize,parseInt(jumpValue))
-                }
+        document.addEventListener('keydown',this.keyDownFn);
+    }
+    componentWillUnmount(){
+        document.removeEventListener('keydown',this.keyDownFn);
+    }
+    keyDownFn(e){
+        if(event.keyCode == 13){
+            const {pageSize,total,onChange} = this.props;
+            const {jumpValue} = this.state;
+            if(jumpValue>0 && jumpValue<=(Math.ceil(total / pageSize))){
+                onChange(pageSize,parseInt(jumpValue))
             }
-        })
+        }
     }
     quickJump(name,value){
         const {pageSize,total,onChange} = this.props;
         if(value>0 && value<=(Math.ceil(total / pageSize))){
-            onChange(pageSize,parseInt(value))
+            onChange(pageSize,parseInt(value));
+            this.setState({jumpValue:''});
         }
     }
     jumpValueChange(name,value){
-        this.setState({jumpValue: parseInt(value)});
+        this.setState({jumpValue: value});
     }
     render() {
         const {pageSize, total, current, hideOnSinglePage, onChange, config, showQuickJump} = this.props;
@@ -90,10 +97,10 @@ export default class Pagination extends React.Component {
         return <div className='pagination-component' style={(hideOnSinglePage && pageNum === 1) ? {display: 'none'} : {}}>
             <ul className='pagination-list'>
                 <li className={current<=1 ? 'disabled':''} onClick={()=>current>1 && onChange(pageSize,1)}>
-                    {first || <span>&lt;&lt;</span>}
+                    {first || <IconFont name='icon-test1'/>}
                 </li>
                 <li className={current<=1 ? 'disabled':''} onClick={()=>current>1 && onChange(pageSize,current-1)}>
-                    {prev || <span>&lt;</span>}
+                    {prev || <IconFont name='xingzhuang'/>}
                 </li>
                 {
                     total > 0 && <li className={current===1 ? 'active':''} onClick={()=>onChange(pageSize,1)}>1</li>
@@ -113,16 +120,18 @@ export default class Pagination extends React.Component {
                     pageNum >= 2 && <li className={current===pageNum ? 'active':''} onClick={()=>onChange(pageSize,pageNum)}>{pageNum}</li>
                 }
                 <li className={current>=pageNum ? 'disabled':''} onClick={()=>current<pageNum && onChange(pageSize,current+1)}>
-                    {next || <span>&gt;</span>}
+                    {next || <IconFont name='xingzhuang1'/>}
                 </li>
                 <li className={current>=pageNum ? 'disabled':''} onClick={()=>current<pageNum && onChange(pageSize,pageNum)}>
-                    {last || <span>&gt;&gt;</span>}
+                    {last || <IconFont name='icon-test'/>}
                 </li>
             </ul>
-            <div className='quick-jump'>
-                <span>{jumpTo}</span>
-                <Input name='jumpTo' value={jumpValue} type='number' onChange={this.jumpValueChange} onBlur={this.quickJump}/>
-            </div>
+            {
+                showQuickJump && <div className='quick-jump'>
+                    <span>{jumpTo}</span>
+                    <Input name='jumpTo' value={jumpValue} type='number' onChange={this.jumpValueChange} onBlur={this.quickJump}/>
+                </div>
+            }
         </div>
     }
 }

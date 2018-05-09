@@ -9,11 +9,12 @@ export default class Home extends React.Component {
     state = {
         input1: 123,
         total: 112,
+        pageSize: 20,
         current: 1,
     };
 
     render() {
-        const {input1,total,current} = this.state;
+        const {input1,total,pageSize,current} = this.state;
         return <div className='home-page'>
                 <div className='rightContent'>
                     <Button text="确定" sureBtn/>
@@ -31,14 +32,15 @@ export default class Home extends React.Component {
             </div>
             <div>
                 <Pagination total={total}
+                            pageSize={pageSize}
                             current={current}
                             onChange={(pageSize,pageNum)=>this.setState({current:pageNum})}
-                            config={{
+                            /*config={{
                                 first: '首页',
                                 last: '尾页',
                                 prev: '上一页',
                                 next: '下一页',
-                            }}
+                            }}*/
                             border={false}/>
             </div>
         </div>
