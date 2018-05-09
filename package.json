@@ -8,7 +8,8 @@
     "start": "node ./scripts/server.js",
     "build": "webpack --config ./scripts/webpack.config.prod.js",
     "clean": "rimraf lib",
-    "lib": "npm run clean && cpx src/components/style/* lib/style && cpx src/components/images/* lib/images && babel src/components -d lib"
+    "move": "cpx src/components/**/*.{js,less,css,md,png,jpg,jpeg} lib/components",
+    "lib": "npm run clean && npm run move && babel lib/components -d lib/components"
   },
   "files": [
     "lib"

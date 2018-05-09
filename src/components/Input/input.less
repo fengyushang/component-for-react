@@ -1,5 +1,5 @@
-@import './size';
-@import './color';
+@import '../style/size';
+@import '../style/color';
 .input-component{
   font-size: 12px;
   display: flex;
@@ -28,5 +28,13 @@
     border: 1px solid @input-default-border;
     border-left: none;
     line-height: @input-height - 2;
+  }
+
+  input::-webkit-outer-spin-button,
+   input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+   }
+  input[type="number"]{
+    -moz-appearance: textfield;
   }
 }
