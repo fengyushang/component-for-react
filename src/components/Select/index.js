@@ -1,24 +1,31 @@
 import React,{Component} from 'react';
 import propTypes from 'prop-types';
 import { autobind } from 'core-decorators';
-import '../style/main.less'
+import './select.less'
 
 @autobind
 class Select extends Component{
     static props = {
         name:propTypes.string,
         label:propTypes.string,
-        config:propTypes.object
+        value:propTypes.string,
+        config:propTypes.object.require
     };
+    state = {
+        dropDown:true
+    }
     static defalutProps = {
         
     }
     changeItem(value){
     }
+    selectClick(){
+
+    }
     render(){
         const {name,label,config} = this.props;
         return(
-            <div className="select-comp">
+            <div className="select-comp" onClick={()=>this.selectClick}>
                 <span>123</span>
                 <ul>
             {

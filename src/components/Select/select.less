@@ -1,15 +1,18 @@
-@import './size.less';
-@import './color.less';
+@import '../style/size.less';
+@import '../style/color.less';
 
 .select-comp{
     position: relative;
+    width:200px;
     span{
         border:1px solid #ddd;
         display: inline-block;
+        width:100%;
         height:@input-height;
         border:1px solid @input-default-border;
-        width:200px;
         line-height: @input-height;
+        cursor: pointer;
+        color:@main-font;
     }
     ul{
         position: absolute;

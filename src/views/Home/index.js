@@ -31,6 +31,7 @@ export default class Home extends React.Component {
                 <div>
                     <Select
                         name="demo"
+                        value="123"
                         config={{
                             options:[{
                                 label:'选项A',
@@ -38,7 +39,8 @@ export default class Home extends React.Component {
                             },{
                                 label:'选项B',
                                 value:2
-                            }]
+                            }],
+                            placeholder:'请输入选项'
                         }
                         }
                     />
