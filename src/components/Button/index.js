@@ -15,9 +15,8 @@ class Button extends Component {
     };
 
     static defaultProps = {
-        text:'button',
+        label:'button',
         type:'button',
-        className:'btn',
     };
 
     render(){
@@ -26,7 +25,7 @@ class Button extends Component {
         return(
             <button type={type} disabled={disabled}
             onClick = {onClick}
-            className={clstype+className }>{label}</button>
+            className={'btn '+clstype+className }>{label}</button>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'proptypes';
+import propTypes from 'prop-types';
 import Input from '../Input';
 import IconFont from '../IconFont';
 import {autobind} from 'core-decorators';
