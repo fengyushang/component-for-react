@@ -62,7 +62,7 @@ export default class Home extends React.Component {
                 <InputSelect
                         name="demo2"
                         value={demo2}
-                        onChange={this.change2}
+                        onChange={this.change}
                         config={{
                             options:[{
                                 label:'选项A',
@@ -75,7 +75,7 @@ export default class Home extends React.Component {
                                 value:3
                             },{
                                 label:'太阳升',
-                                value:2
+                                value:6
                             },{
                                 label:'西边冒出个',
                                 value:4

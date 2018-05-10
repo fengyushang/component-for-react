@@ -27,6 +27,7 @@ class InputSelect extends Component{
     }
     changeItem(name,value){
         const {onChange} = this.props;
+        this.setState({dropDown:true});
         onChange(name,value);
     }
     selectClick(){
@@ -44,11 +45,9 @@ class InputSelect extends Component{
         if(!this.state.dropDown){
             switch(code){
                 case 38:
-                    console.log(--selectPos);
                     selectPos!=='' && selectPos>=0 && this.setState({selectPos:selectPos});
                     break;
                 case 40:
-                    console.log(++selectPos,dropOptions);
                     dropOptions.length > 0 && (!selectPos || selectPos < dropOptions.length) && this.setState({selectPos:selectPos});
                     break;
                 default:
@@ -95,7 +94,7 @@ class InputSelect extends Component{
                     value ?
                     dropOptions && dropOptions.map((item,idx)=>{
                             if(value == item.value){
-                                return <div><input key={idx} defaultValue={item.label}
+                                return <div key={idx}><input defaultValue={item.label}
                                  placeholder={placeholder}
                                  onChange={this.searchSelect}
                                 /><Iconfont name="icon"/></div>
