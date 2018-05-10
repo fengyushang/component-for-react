@@ -1,0 +1,53 @@
+@import '../style/size.less';
+@import '../style/color.less';
+
+.select-comp{
+    position: relative;
+    width:200px;
+    background: @white-color;
+    span,input{
+        border:1px solid #ddd;
+        display: inline-block;
+        width:100%;
+        height:@input-height;
+        border:1px solid @input-default-border;
+        line-height: @input-height;
+        cursor: pointer;
+        color:@main-font;
+        outline:0;
+    }
+    ul{
+        position: absolute;
+        width: 100%;
+        border:1px solid @input-default-border;
+        top:@input-height+2;
+        background: @white-color;
+        display: none;
+        &:before{
+            position: absolute;
+            content:'';
+            background: @white-color;
+            height:2px;
+            width:100%;
+            top:-3px;
+            z-index:6;
+        }
+    }
+    li{
+        height:@input-height;
+        line-height:@input-height;
+        cursor: pointer;
+        &:hover{
+            background-color: @select-bac;
+        }
+    }
+    &.blueBorder{
+        span,ul{
+            border-color:@blue-button-bac;
+            box-shadow: 0 0 2px 1px @blue-button-bac-hover;
+        }
+        ul{
+            display: block;
+        }
+    }
+}

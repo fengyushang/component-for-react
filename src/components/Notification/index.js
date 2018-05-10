@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import IconFont from 'components/IconFont';
-import './alert.less';
+import './notification.less';
 
-class Alert extends React.Component {
+class Notification extends React.Component {
     state = {
         queue: [],
     };
@@ -35,7 +35,7 @@ class Alert extends React.Component {
         return <React.Fragment>
             {
                 queue.map((obj,key) => {
-                    return <div key={key} className={'alert-item ' + (obj.type ? 'alert-' + obj.type : '')}>
+                    return <div key={key} className={'notification-item ' + (obj.type ? 'notification-' + obj.type : '')}>
                         <IconFont name={iconObj[obj.type]}/>
                         <div>{obj.msg}</div>
                     </div>
@@ -45,27 +45,27 @@ class Alert extends React.Component {
     }
 }
 
-let node = document.getElementById('alert-container');
+let node = document.getElementById('notification-container');
 if (!node) {
     node = document.createElement('div');
-    node.setAttribute('id', 'alert-container');
+    node.setAttribute('id', 'notification-container');
     document.body.appendChild(node);
 }
 
-let alertArray;
-ReactDOM.render(<Alert ref={(ref) => {
-    alertArray = ref
-}}/>, document.getElementById('alert-container'));
+let notificationArray;
+ReactDOM.render(<Notification ref={(ref) => {
+    notificationArray = ref
+}}/>, document.getElementById('notification-container'));
 
 export const success = (msg) => {
-    alertArray.pushQueue({msg, type: 'success'});
+    notificationArray.pushQueue({msg, type: 'success'});
 };
 export const info = (msg) => {
-    alertArray.pushQueue({msg, type: 'info'});
+    notificationArray.pushQueue({msg, type: 'info'});
 };
 export const warning = (msg) => {
-    alertArray.pushQueue({msg, type: 'warning'});
+    notificationArray.pushQueue({msg, type: 'warning'});
 };
 export const error = (msg) => {
-    alertArray.pushQueue({msg, type: 'error'});
+    notificationArray.pushQueue({msg, type: 'error'});
 };

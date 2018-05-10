@@ -1,7 +1,7 @@
 ## API
 
 ```html
-import {success, info, warning, error} from 'component-for-react/Alert';
+import {success, info, warning, error} from 'component-for-react/Notification';
 success('成功信息');
 info('提示信息');
 warning('警告信息');

@@ -1,11 +1,5 @@
-import React,{Component} from 'react';
+import Select from './NormalSelect';
+import InputSelect from './InputSelect';
 
-class Select extends Component{
-    render(){
-        return(
-            <div className="select">
-                
-            </div>
-        )
-    }
-}
+export  default Select;
+export {InputSelect};

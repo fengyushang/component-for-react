@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
-import '../style/main.less';
+import './button';
 
 class Button extends Component {
     
     static props = {
-        text:PropTypes.string,
+        label:PropTypes.string,
         type:PropTypes.string,
         sureBtn:PropTypes.bool,
         cancelBtn:PropTypes.bool,
@@ -15,18 +15,17 @@ class Button extends Component {
     };
 
     static defaultProps = {
-        text:'button',
+        label:'button',
         type:'button',
-        className:'btn',
     };
 
     render(){
-        const {text,type,className,disabled,onClick,sureBtn,cancelBtn} = this.props;
+        const {label,type,className,disabled,onClick,sureBtn,cancelBtn} = this.props;
         const clstype = sureBtn ? 'sureBtn ' : (cancelBtn ? 'cancelBtn ' : '');
         return(
             <button type={type} disabled={disabled}
             onClick = {onClick}
-            className={clstype+className }>{text}</button>
+            className={'btn '+clstype+className }>{label}</button>
         )
     }
 }

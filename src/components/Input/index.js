@@ -37,15 +37,17 @@ export default class Input extends React.Component {
     render() {
         const {name, value, disabled, error, unit, type, placeholder} = this.props;
         return <div className={'input-component'+(error?' input-error':'')}>
-            <input name={name}
-                   value={value}
-                   type={type}
-                   onChange={this.inputChange}
-                   onBlur={this.inputBlur}
-                   disabled={disabled}
-                   placeholder={placeholder}
-            />
-            { unit && <span className='unit' ref={(val)=>this.unitNode = val}>{unit}</span>}
+            <div>
+                <input name={name}
+                       value={value}
+                       type={type}
+                       onChange={this.inputChange}
+                       onBlur={this.inputBlur}
+                       disabled={disabled}
+                       placeholder={placeholder}
+                />
+                { unit && <span className='unit' ref={(val)=>this.unitNode = val}>{unit}</span>}
+            </div>
         </div>
     }
 }
