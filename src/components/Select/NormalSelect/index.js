@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import propTypes from 'prop-types';
 import { autobind } from 'core-decorators';
-import IconFont from '../../IconFont';
 import '../select.less'
 
 @autobind
@@ -48,10 +47,10 @@ class Select extends Component{
                     value ?
                         config.options && config.options.map((item,idx)=>{
                             if(value == item.value){
-                                return <span key={idx}>{item.label}<IconFont name="icon"/></span>;
+                                return <span key={idx}>{item.label}</span>;
                             }
                         })
-                    : (config.placeholder ? <span>{config.placeholder}<IconFont name="icon"/></span> : '')
+                    : (config.placeholder ? <span>{config.placeholder}</span> : '')
 
                 }
                 <ul>
