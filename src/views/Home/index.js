@@ -3,19 +3,26 @@ import 'components/style/main.less';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Pagination from 'components/Pagination';
-import Select from 'components/Select';
+import Select,{InputSelect} from 'components/Select';
+import {autobind} from 'core-decorators';
 import './style.less';
 
+@autobind
 export default class Home extends React.Component {
     state = {
         input1: 123,
         total: 112,
         pageSize: 20,
         current: 1,
+        demo:'1',
+        demo2:'1'
     };
 
+    change(name,value){
+        this.setState({[name]:value});
+    }
     render() {
-        const {input1,total,pageSize,current} = this.state;
+        const {input1,total,pageSize,current,demo,demo2} = this.state;
         return <div className='home-page'>
                 <div className='rightContent'>
                     <Button label="确定" sureBtn/>
@@ -34,7 +41,8 @@ export default class Home extends React.Component {
                 <div>
                     <Select
                         name="demo"
-                        value="123"
+                        value={demo}
+                        onChange={this.change}
                         config={{
                             options:[{
                                 label:'选项A',
@@ -47,6 +55,25 @@ export default class Home extends React.Component {
                         }
                         }
                     />
+                </div>
+                <div>
+                <InputSelect
+                        name="demo2"
+                        value={demo2}
+                        onChange={this.change}
+                        config={{
+                            options:[{
+                                label:'选项A',
+                                value:1
+                            },{
+                                label:'选项B',
+                                value:2
+                            }],
+                            placeholder:'请输入选项'
+                        }
+                        }
+                    />
+                
                 </div>
             <div>
                 <Pagination total={total}
