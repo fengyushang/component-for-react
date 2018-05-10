@@ -1,40 +1,43 @@
 @import '../style/size';
 @import '../style/color';
-.input-component{
+
+.input-component {
   font-size: 12px;
-  display: flex;
-  input{
-    flex: 1;
-    height: @input-height;
-    border: 1px solid @input-default-border;
-    outline: none;
-    padding: 0 @input-padding;
-    &:focus{
-      border-color: @input-edit-border;
-    }
-    &:disabled,&:disabled + .unit{
-      background-color: @input-readonly-bac;
-      color: @input-readonly-font;
-    }
-  }
-  &.input-error{
-    input{
+  display: inline-block;
+  &.input-error {
+    input {
       background-color: @input-error-bac;
       border-color: @input-error-border;
     }
   }
-  .unit{
-    padding: 0 6px;
-    border: 1px solid @input-default-border;
-    border-left: none;
-    line-height: @input-height - 2;
+  > div {
+    display: flex;
+    input {
+      flex: 1;
+      height: @input-height;
+      border: 1px solid @input-default-border;
+      outline: none;
+      padding: 0 @input-padding;
+      &:focus {
+        border-color: @input-edit-border;
+      }
+      &:disabled, &:disabled + .unit {
+        background-color: @input-readonly-bac;
+        color: @input-readonly-font;
+      }
+    }
+    .unit {
+      padding: 0 6px;
+      line-height: @input-height - 2px;
+      border: 1px solid @input-default-border;
+      border-left: none;
+    }
   }
-
   input::-webkit-outer-spin-button,
-   input::-webkit-inner-spin-button {
-     -webkit-appearance: none;
-   }
-  input[type="number"]{
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  input[type="number"] {
     -moz-appearance: textfield;
   }
 }

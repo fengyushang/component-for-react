@@ -37,12 +37,13 @@ export default class Pagination extends React.Component {
     componentWillUnmount(){
         document.removeEventListener('keydown',this.keyDownFn);
     }
-    keyDownFn(e){
-        if(event.keyCode == 13){
+    keyDownFn(event){
+        if(event.keyCode === 13){
             const {pageSize,total,onChange} = this.props;
             const {jumpValue} = this.state;
             if(jumpValue>0 && jumpValue<=(Math.ceil(total / pageSize))){
-                onChange(pageSize,parseInt(jumpValue))
+                onChange(pageSize,parseInt(jumpValue));
+                this.setState({jumpValue:''});
             }
         }
     }
@@ -96,40 +97,56 @@ export default class Pagination extends React.Component {
 
         return <div className='pagination-component' style={(hideOnSinglePage && pageNum === 1) ? {display: 'none'} : {}}>
             <ul className='pagination-list'>
-                <li className={current<=1 ? 'disabled':''} onClick={()=>current>1 && onChange(pageSize,1)}>
+                <li className={current<=1 ? 'disabled':''}
+                    onClick={()=>current>1 && onChange(pageSize,1)}>
                     {first || <IconFont name='icon-test1'/>}
                 </li>
-                <li className={current<=1 ? 'disabled':''} onClick={()=>current>1 && onChange(pageSize,current-1)}>
+                <li className={current<=1 ? 'disabled':''}
+                    onClick={()=>current>1 && onChange(pageSize,current-1)}>
                     {prev || <IconFont name='xingzhuang'/>}
                 </li>
                 {
                     total > 0 && <li className={current===1 ? 'active':''} onClick={()=>onChange(pageSize,1)}>1</li>
                 }
                 {
-                    left && <li title={`previous ${step} pages`} className='jump-prev' onClick={()=>onChange(pageSize,current-step>1 ? current-step : 1)}>· · ·</li>
+                    left && <li title={`previous ${step} pages`}
+                                className='jump-prev'
+                                onClick={()=>onChange(pageSize,current-step>1 ? current-step : 1)}>· · ·</li>
                 }
                 {
                     pages.map((item, key) => {
-                        return <li key={key} className={current===item ? 'active':''} onClick={()=>onChange(pageSize,item)}>{item}</li>
+                        return <li key={key}
+                                   className={current===item ? 'active':''}
+                                   onClick={()=>onChange(pageSize,item)}>
+                            {item}
+                        </li>
                     })
                 }
                 {
-                    right && <li title={`next ${step} pages`} className='jump-next' onClick={()=>onChange(pageSize,current+step>pageNum ? pageNum : current+step)}>· · ·</li>
+                    right && <li title={`next ${step} pages`}
+                                 className='jump-next'
+                                 onClick={()=>onChange(pageSize,current+step>pageNum ? pageNum : current+step)}>· · ·</li>
                 }
                 {
                     pageNum >= 2 && <li className={current===pageNum ? 'active':''} onClick={()=>onChange(pageSize,pageNum)}>{pageNum}</li>
                 }
-                <li className={current>=pageNum ? 'disabled':''} onClick={()=>current<pageNum && onChange(pageSize,current+1)}>
+                <li className={current>=pageNum ? 'disabled':''}
+                    onClick={()=>current<pageNum && onChange(pageSize,current+1)}>
                     {next || <IconFont name='xingzhuang1'/>}
                 </li>
-                <li className={current>=pageNum ? 'disabled':''} onClick={()=>current<pageNum && onChange(pageSize,pageNum)}>
+                <li className={current>=pageNum ? 'disabled':''}
+                    onClick={()=>current<pageNum && onChange(pageSize,pageNum)}>
                     {last || <IconFont name='icon-test'/>}
                 </li>
             </ul>
             {
                 showQuickJump && <div className='quick-jump'>
                     <span>{jumpTo}</span>
-                    <Input name='jumpTo' value={jumpValue} type='number' onChange={this.jumpValueChange} onBlur={this.quickJump}/>
+                    <Input name='jumpTo'
+                           value={jumpValue}
+                           type='number'
+                           onChange={this.jumpValueChange}
+                           onBlur={this.quickJump}/>
                 </div>
             }
         </div>

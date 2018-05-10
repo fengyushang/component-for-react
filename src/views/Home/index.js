@@ -3,6 +3,7 @@ import 'components/style/main.less';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Pagination from 'components/Pagination';
+import {success, info, warning, error} from 'components/Message';
 import Select,{InputSelect} from 'components/Select';
 import {autobind} from 'core-decorators';
 import './style.less';
@@ -81,14 +82,21 @@ export default class Home extends React.Component {
                 <Pagination total={total}
                             pageSize={pageSize}
                             current={current}
-                            onChange={(pageSize,pageNum)=>this.setState({current:pageNum})}
-                            /*config={{
-                                first: '首页',
-                                last: '尾页',
-                                prev: '上一页',
-                                next: '下一页',
-                            }}*/
+                            onChange={(pageSize, pageNum) => this.setState({current: pageNum})}
+                    /*config={{
+                        first: '首页',
+                        last: '尾页',
+                        prev: '上一页',
+                        next: '下一页',
+                    }}*/
                             border={false}/>
+            </div>
+            <div>
+                <div>message信息</div>
+                <Button label="success" sureBtn onClick={()=>success('success')}/>
+                <Button label="info" sureBtn onClick={()=>info('info')}/>
+                <Button label="warning" sureBtn onClick={()=>warning('warning')}/>
+                <Button label="error" sureBtn onClick={()=>error('error')}/>
             </div>
         </div>
     }
