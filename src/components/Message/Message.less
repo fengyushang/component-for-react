@@ -1,0 +1,63 @@
+@import '../style/size';
+@import '../style/color';
+#message-container{
+  position: fixed;
+  top: 100px;
+  z-index: 9999;
+  left: 50%;
+  transform: translate(-50%,0);
+  -webkit-transform: translate(-50%,0);
+  .message-item{
+    min-width: @message-min-width;
+    max-width: @message-max-width;
+    padding: @message-padding-vertical @message-padding-horizontal;
+    margin-bottom: @message-margin-bottom;
+    border-radius: @message-border-radius;
+    position: relative;
+    animation: showMessage .7s , hideMessage .7s 2.4s;
+    &.message-success{
+      .message-variant(@message-success-bg; @message-success-border);
+    }
+    &.message-info{
+      .message-variant(@message-info-bg; @message-info-border);
+    }
+    &.message-warning{
+      .message-variant(@message-warning-bg; @message-warning-border);
+    }
+    &.message-error{
+      .message-variant(@message-error-bg; @message-error-border);
+    }
+  }
+}
+
+.message-variant(@background; @border) {
+  background-color: @background;
+  border: 1px solid @border;
+  > .iconfont{
+    position: absolute;
+    left: 12px;
+    top: @message-padding-vertical + 1.5px;
+    font-size: 14px;
+    color: @border;
+  }
+  > div{
+    margin-left: 20px;
+    word-break: break-word;
+  }
+}
+@keyframes showMessage {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+@keyframes hideMessage {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}

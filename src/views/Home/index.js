@@ -3,7 +3,7 @@ import 'components/style/main.less';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Pagination from 'components/Pagination';
-import {success, info, warning, error} from 'components/Notification';
+import {success, info, warning, error} from 'components/Message';
 import Select,{InputSelect} from 'components/Select';
 import {autobind} from 'core-decorators';
 import './style.less';
@@ -90,7 +90,7 @@ export default class Home extends React.Component {
                             border={false}/>
             </div>
             <div>
-                <div>notification信息</div>
+                <div>message信息</div>
                 <Button label="success" sureBtn onClick={()=>success('success')}/>
                 <Button label="info" sureBtn onClick={()=>info('info')}/>
                 <Button label="warning" sureBtn onClick={()=>warning('warning')}/>

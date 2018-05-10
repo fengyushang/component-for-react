@@ -1,31 +1,32 @@
 @import '../style/size';
 @import '../style/color';
-.input-component{
+
+.input-component {
   font-size: 12px;
   display: inline-block;
-  >div{
+  &.input-error {
+    input {
+      background-color: @input-error-bac;
+      border-color: @input-error-border;
+    }
+  }
+  > div {
     display: flex;
-    input{
+    input {
       flex: 1;
       height: @input-height;
       border: 1px solid @input-default-border;
       outline: none;
       padding: 0 @input-padding;
-      &:focus{
+      &:focus {
         border-color: @input-edit-border;
       }
-      &:disabled,&:disabled + .unit{
+      &:disabled, &:disabled + .unit {
         background-color: @input-readonly-bac;
         color: @input-readonly-font;
       }
     }
-    &.input-error{
-      input{
-        background-color: @input-error-bac;
-        border-color: @input-error-border;
-      }
-    }
-    .unit{
+    .unit {
       padding: 0 6px;
       line-height: @input-height - 2px;
       border: 1px solid @input-default-border;
@@ -33,10 +34,10 @@
     }
   }
   input::-webkit-outer-spin-button,
-   input::-webkit-inner-spin-button {
-     -webkit-appearance: none;
-   }
-  input[type="number"]{
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  input[type="number"] {
     -moz-appearance: textfield;
   }
 }
