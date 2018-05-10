@@ -1,6 +1,7 @@
 @import '../style/size.less';
 @import '../style/color.less';
 
+@select-indent:12px;
 .select-comp{
     position: relative;
     width:200px;
@@ -15,6 +16,7 @@
         cursor: pointer;
         color:@main-font;
         outline:0;
+        text-indent: @select-indent;
     }
     ul{
         position: absolute;
@@ -37,12 +39,13 @@
         height:@input-height;
         line-height:@input-height;
         cursor: pointer;
-        &:hover{
+        text-indent: @select-indent;
+        &:hover,&.active{
             background-color: @select-bac;
         }
     }
     &.blueBorder{
-        span,ul{
+        span,ul,input{
             border-color:@blue-button-bac;
             box-shadow: 0 0 2px 1px @blue-button-bac-hover;
         }
