@@ -26,12 +26,23 @@ class Select extends Component{
         let {dropDown} = this.state;
         this.setState({dropDown:!dropDown})
     }
+    componentDidMount(){
+        document.addEventListener('click',this.eventListener);
+    }
+    eventListener(ev){
+        if(this.selectContainer && !this.selectContainer.contains(ev.target)){
+            !this.state.dropDown && this.setState({dropDown:true})
+        }
+    }
+    componentWillUnmount(){
+        document.removeEventListener('click',this.eventListener);
+    }
     render(){
         const {name,label,config,value} = this.props;
         const {dropDown} = this.state;
         const borderCls = dropDown ? '' : 'blueBorder';
         return(
-            <div className={"select-comp "+borderCls} onClick={()=>this.selectClick()}>
+            <div className={"select-comp "+borderCls} onClick={()=>this.selectClick()} ref={(container)=>{this.selectContainer=container}}>
                 {
                     value ?
                         config.options && config.options.map((item,idx)=>{
