@@ -72,7 +72,20 @@ export default class Home extends React.Component {
                             },{
                                 label:'选项B',
                                 value:2
-                            }],
+                            },{
+                                label:'东方鸿',
+                                value:3
+                            },{
+                                label:'太阳升',
+                                value:2
+                            },{
+                                label:'西边冒出个',
+                                value:4
+                            },{
+                                label:'毛泽东',
+                                value:5
+                            }
+                        ],
                         }
                         }
                     />

@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import propTypes from 'prop-types';
 import { autobind } from 'core-decorators';
+import Iconfont from '../../IconFont';
 import '../select.less'
 
 @autobind
@@ -17,7 +18,8 @@ class InputSelect extends Component{
     state = {
         dropDown:true,
         dropOptions:[],
-        selectVal:''
+        selectVal:'',
+        selectPos:-1
     }
     static defaultProps = {
         placeholder:'请输入选项',
@@ -36,20 +38,30 @@ class InputSelect extends Component{
         document.addEventListener('keyup',this.dealKeyEvent)
     }
     dealKeyEvent(ev){
+        const code = ev.keyCode;
+        let {selectPos,dropOptions} = this.state;
+        let pos = selectPos;
+        if(!this.state.dropDown){
+            switch(code){
+                case 38:
+                    console.log(--selectPos);
+                    selectPos!=='' && selectPos>=0 && this.setState({selectPos:selectPos});
+                    break;
+                case 40:
+                    console.log(++selectPos,dropOptions);
+                    dropOptions.length > 0 && (!selectPos || selectPos < dropOptions.length) && this.setState({selectPos:selectPos});
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
     eventListener(ev){
         if(this.selectContainer && !this.selectContainer.contains(ev.target)){
             !this.state.dropDown && this.setState({dropDown:true})
         }
-        this.pureSelectResuld();
-    }
-    pureSelectResuld(){
-        const {dropOptions,selectVal} = this.state;
-        selectVal == '' && dropOptions.filter((item)=>{
-            return item.active = false;
-        })
-        this.setState({dropOptions:dropOptions});
+        this.setState({selectPos:-1})
     }
     searchSelect(ev){
         const {config} = this.props;
@@ -57,25 +69,15 @@ class InputSelect extends Component{
         let newArr = config.options.filter((item,idx)=>{
             return item.label.includes(res);
         });
-        this.state.dropDown ? this.setState({dropDown:false,selectVal:res}): this.setState({selectVal:res})
-        newArr = this.autoResult(res,newArr);
         this.setState({dropOptions:newArr});
     }
     autoResult(res,arr){
-        const {name,onChange,config} = this.props;
-        arr.length > 0 && res!='' ? (arr[0].active = true) : 
-        (arr.filter((item)=>{return item.active = false}));
+        arr.length > 0 && res!='' ? (this.setState({selectPos:0})) : 
+        (this.setState({selectPos:''}));
         return arr;
     }
     mouseLi(idx){
-        let {dropOptions} = this.state;
-        const arr = dropOptions.filter((item,idx)=>{
-            return item.active = false;
-        });
-        dropOptions[idx].active = true;
-        this.setState({dropOptions:dropOptions})
-        //this.setState({dropOptions:arr});
-        // dropOptions[idx].active = true;
+        this.setState({selectPos:idx});
     }
     componentWillUnmount(){
         document.removeEventListener('click',this.eventListener);
@@ -83,7 +85,7 @@ class InputSelect extends Component{
     }
     render(){
         const {name,label,config,value,placeholder} = this.props;
-        const {dropDown,dropOptions} = this.state;
+        const {dropDown,dropOptions,selectPos} = this.state;
         const borderCls = dropDown ? '' : 'blueBorder';
         return(
             <div className={"select-comp "+borderCls} onClick={()=>this.selectClick()}
@@ -93,14 +95,13 @@ class InputSelect extends Component{
                     value ?
                     dropOptions && dropOptions.map((item,idx)=>{
                             if(value == item.value){
-                                return <input key={idx} defaultValue={item.label}
+                                return <div><input key={idx} defaultValue={item.label}
                                  placeholder={placeholder}
                                  onChange={this.searchSelect}
-                                />
+                                /><Iconfont name="icon"/></div>
                             }
                         })
-                    : <input placeholder={placeholder} onChange={this.searchSelect}/>
-
+                    : <div><input placeholder={placeholder} onChange={this.searchSelect}/><Iconfont name="icon"/></div>
                 }
                 <ul>
                 {
@@ -108,7 +109,7 @@ class InputSelect extends Component{
                         return <li key={idx} 
                         onMouseEnter ={()=>this.mouseLi(idx)}
                         onClick={()=>this.changeItem(name,item.value)} 
-                                className={item.active ? 'active' : ''}
+                                className={idx === selectPos ? 'active' : ''}
                         >{item.label}</li>
                     })
                 }
