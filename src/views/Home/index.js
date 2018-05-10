@@ -15,11 +15,14 @@ export default class Home extends React.Component {
         pageSize: 20,
         current: 1,
         demo:'1',
-        demo2:'1'
+        demo2:''
     };
 
     change(name,value){
         this.setState({[name]:value});
+    }
+    change2(name,val){
+        console.log(name,val);
     }
     render() {
         const {input1,total,pageSize,current,demo,demo2} = this.state;
@@ -43,6 +46,7 @@ export default class Home extends React.Component {
                         name="demo"
                         value={demo}
                         onChange={this.change}
+                        placeholder='请输入选项'                        
                         config={{
                             options:[{
                                 label:'选项A',
@@ -51,7 +55,6 @@ export default class Home extends React.Component {
                                 label:'选项B',
                                 value:2
                             }],
-                            placeholder:'请输入选项'
                         }
                         }
                     />
@@ -60,7 +63,7 @@ export default class Home extends React.Component {
                 <InputSelect
                         name="demo2"
                         value={demo2}
-                        onChange={this.change}
+                        onChange={this.change2}
                         config={{
                             options:[{
                                 label:'选项A',
@@ -69,7 +72,6 @@ export default class Home extends React.Component {
                                 label:'选项B',
                                 value:2
                             }],
-                            placeholder:'请输入选项'
                         }
                         }
                     />

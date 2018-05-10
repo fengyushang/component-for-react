@@ -5,41 +5,85 @@ import '../select.less'
 
 @autobind
 class InputSelect extends Component{
+
     static props = {
         name:propTypes.string,
         label:propTypes.string,
         value:propTypes.string,
         onChange:propTypes.func.require,
+        placeholder:propTypes.string,
         config:propTypes.object.require
     };
     state = {
-        dropDown:true
+        dropDown:true,
+        dropOptions:[],
+        selectVal:''
     }
-    static defalutProps = {
-        
+    static defaultProps = {
+        placeholder:'请输入选项',
+        config:{}
     }
     changeItem(name,value){
         const {onChange} = this.props;
         onChange(name,value);
     }
     selectClick(){
-        let {dropDown} = this.state;
-        this.setState({dropDown:!dropDown})
+        this.state.dropDown && this.setState({dropDown:false})
     }
     componentDidMount(){
+        this.setState({dropOptions:this.props.config.options});
         document.addEventListener('click',this.eventListener);
+        document.addEventListener('keyup',this.dealKeyEvent)
+    }
+    dealKeyEvent(ev){
+
     }
     eventListener(ev){
         if(this.selectContainer && !this.selectContainer.contains(ev.target)){
             !this.state.dropDown && this.setState({dropDown:true})
         }
+        this.pureSelectResuld();
+    }
+    pureSelectResuld(){
+        const {dropOptions,selectVal} = this.state;
+        selectVal == '' && dropOptions.filter((item)=>{
+            return item.active = false;
+        })
+        this.setState({dropOptions:dropOptions});
+    }
+    searchSelect(ev){
+        const {config} = this.props;
+        let res = ev.target.value;
+        let newArr = config.options.filter((item,idx)=>{
+            return item.label.includes(res);
+        });
+        this.state.dropDown ? this.setState({dropDown:false,selectVal:res}): this.setState({selectVal:res})
+        newArr = this.autoResult(res,newArr);
+        this.setState({dropOptions:newArr});
+    }
+    autoResult(res,arr){
+        const {name,onChange,config} = this.props;
+        arr.length > 0 && res!='' ? (arr[0].active = true) : 
+        (arr.filter((item)=>{return item.active = false}));
+        return arr;
+    }
+    mouseLi(idx){
+        let {dropOptions} = this.state;
+        const arr = dropOptions.filter((item,idx)=>{
+            return item.active = false;
+        });
+        dropOptions[idx].active = true;
+        this.setState({dropOptions:dropOptions})
+        //this.setState({dropOptions:arr});
+        // dropOptions[idx].active = true;
     }
     componentWillUnmount(){
         document.removeEventListener('click',this.eventListener);
+        document.removeEventListener('keyup',this.dealKeyEvent);
     }
     render(){
-        const {name,label,config,value} = this.props;
-        const {dropDown} = this.state;
+        const {name,label,config,value,placeholder} = this.props;
+        const {dropDown,dropOptions} = this.state;
         const borderCls = dropDown ? '' : 'blueBorder';
         return(
             <div className={"select-comp "+borderCls} onClick={()=>this.selectClick()}
@@ -47,18 +91,25 @@ class InputSelect extends Component{
             >
                 {
                     value ?
-                        config.options && config.options.map((item,idx)=>{
+                    dropOptions && dropOptions.map((item,idx)=>{
                             if(value == item.value){
-                                return <input key={idx} defaultValue={item.label} placeholder={config.placeholder}/>
+                                return <input key={idx} defaultValue={item.label}
+                                 placeholder={placeholder}
+                                 onChange={this.searchSelect}
+                                />
                             }
                         })
-                    : ''
+                    : <input placeholder={placeholder} onChange={this.searchSelect}/>
 
                 }
                 <ul>
                 {
-                    config && config.options && config.options.map((item,idx)=>{
-                        return <li key={idx} onClick={()=>this.changeItem(name,item.value)}>{item.label}</li>
+                    dropOptions && dropOptions.map((item,idx)=>{
+                        return <li key={idx} 
+                        onMouseEnter ={()=>this.mouseLi(idx)}
+                        onClick={()=>this.changeItem(name,item.value)} 
+                                className={item.active ? 'active' : ''}
+                        >{item.label}</li>
                     })
                 }
                 </ul>
