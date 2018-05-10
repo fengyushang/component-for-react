@@ -38,7 +38,7 @@ export default class Home extends React.Component {
                         unit='美元'
                     />
                 </div>
-                <div>
+                <div className="fl">
                     <Select
                         name="demo"
                         value={demo}
@@ -56,7 +56,7 @@ export default class Home extends React.Component {
                         }
                     />
                 </div>
-                <div>
+                <div className="fl" style={{'marginLeft':'20px'}}>
                 <InputSelect
                         name="demo2"
                         value={demo2}
@@ -75,7 +75,7 @@ export default class Home extends React.Component {
                     />
                 
                 </div>
-            <div>
+            <div style={{'clear':'both'}}>
                 <Pagination total={total}
                             pageSize={pageSize}
                             current={current}
