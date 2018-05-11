@@ -1,5 +1,3 @@
-import Decimal from 'decimal.js';
-
 // JavaScript Document
 
 //防止网页被iframe嵌套
@@ -302,13 +300,12 @@ function soleString32(){
 
 //时间变成两位数
 function toTwo(n){
-	return n<10? '0'+n: ''+n;
+	return n<10?'0'+n:n+'';
 };
 
 //算出本月天数
 function manyDay(year,month){
-	month=month+1;
-	var nextMonth=new Date(year,month,0);//根据下个月第0天=上个月的最后一天，-1=倒数第二天
+	var nextMonth=new Date(year,month,0);//本月第0天就是最后一天，-1=倒数第二天
 	return nextMonth.getDate();
 };
 
@@ -3073,4 +3070,5 @@ export{
 		changeTwoDecimal_f,
 		getPos,
 		HasClass,
+		manyDay,
 	};
