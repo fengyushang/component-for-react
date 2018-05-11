@@ -14,14 +14,11 @@ export default class Home extends React.Component {
         pageSize: 20,
         current: 1,
         demo:'1',
-        demo2:''
+        demo2:'1'
     };
 
     change(name,value){
         this.setState({[name]:value});
-    }
-    change2(name,val){
-        console.log(name,val);
     }
     render() {
         const {input1,total,pageSize,current,demo,demo2} = this.state;
