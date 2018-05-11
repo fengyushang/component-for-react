@@ -57,17 +57,15 @@ ReactDOM.render(<Message ref={(ref) => {
     messageArray = ref
 }}/>, document.getElementById('message-container'));
 
-export default {
-    success(msg){
-        return messageArray.pushQueue({msg, type: 'success'});
-    },
-    info(msg){
-        return messageArray.pushQueue({msg, type: 'info'});
-    },
-    warning(msg){
-        return messageArray.pushQueue({msg, type: 'warning'});
-    },
-    error(msg) {
-        return messageArray.pushQueue({msg, type: 'error'});
-    }
+export const success = (msg) => {
+    messageArray.pushQueue({msg, type: 'success'});
+};
+export const info = (msg) => {
+    messageArray.pushQueue({msg, type: 'info'});
+};
+export const warning = (msg) => {
+    messageArray.pushQueue({msg, type: 'warning'});
+};
+export const error = (msg) => {
+    messageArray.pushQueue({msg, type: 'error'});
 };
