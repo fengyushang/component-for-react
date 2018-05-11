@@ -1,9 +1,7 @@
 import React from 'react';
 import 'components/style/main.less';
 import Button from 'components/Button';
-import Input from 'components/Input';
-import Pagination from 'components/Pagination';
-import {success, info, warning, error} from 'components/Message';
+import {message,Input,Pagination,Row,Col} from '../../components';
 import Select,{InputSelect} from 'components/Select';
 import {autobind} from 'core-decorators';
 import './style.less';
@@ -102,11 +100,22 @@ export default class Home extends React.Component {
             </div>
             <div>
                 <div>message信息</div>
-                <Button label="success" sureBtn onClick={()=>success('success')}/>
-                <Button label="info" sureBtn onClick={()=>info('info')}/>
-                <Button label="warning" sureBtn onClick={()=>warning('warning')}/>
-                <Button label="error" sureBtn onClick={()=>error('error')}/>
+                <Button label="success" sureBtn onClick={()=>message.success('success')}/>
+                <Button label="info" sureBtn onClick={()=>message.info('info')}/>
+                <Button label="warning" sureBtn onClick={()=>message.warning('warning')}/>
+                <Button label="error" sureBtn onClick={()=>message.error('error')}/>
             </div>
+            <Row gutter={8}>
+                <Col span={3}>
+                    <div>1</div>
+                </Col>
+                <Col span={6}>
+                    <div>2</div>
+                </Col>
+                <Col span={3}>
+                    <div>3</div>
+                </Col>
+            </Row>
         </div>
     }
 }
