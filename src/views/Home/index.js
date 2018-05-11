@@ -1,7 +1,7 @@
 import React from 'react';
 import 'components/style/main.less';
 import Button from 'components/Button';
-import {message,Input,Pagination} from '../../components';
+import {message,Input,Pagination,Row,Col} from '../../components';
 import Select,{InputSelect} from 'components/Select';
 import {autobind} from 'core-decorators';
 import './style.less';
@@ -96,6 +96,17 @@ export default class Home extends React.Component {
                 <Button label="warning" sureBtn onClick={()=>message.warning('warning')}/>
                 <Button label="error" sureBtn onClick={()=>message.error('error')}/>
             </div>
+            <Row gutter={8}>
+                <Col span={3}>
+                    <div>1</div>
+                </Col>
+                <Col span={6}>
+                    <div>2</div>
+                </Col>
+                <Col span={3}>
+                    <div>3</div>
+                </Col>
+            </Row>
         </div>
     }
 }

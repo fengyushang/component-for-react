@@ -1,11 +1,11 @@
 ## API
 
 ```html
-import {success, info, warning, error} from 'component-for-react/Message';
-success('成功信息');
-info('提示信息');
-warning('警告信息');
-error('错误信息');
+import {message} from 'component-for-react';
+message.success('成功信息');
+message.info('提示信息');
+message.warning('警告信息');
+message.error('错误信息');
 ```
 
 | 参数 | 说明 | 类型 | 默认值 | 必需 |
