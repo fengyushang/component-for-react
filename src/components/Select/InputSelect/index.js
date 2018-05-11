@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import propTypes from 'prop-types';
 import { autobind } from 'core-decorators';
 import '../select.less'
+import IconFont from 'components/IconFont';
 
 @autobind
 class InputSelect extends Component{
@@ -131,7 +132,7 @@ class InputSelect extends Component{
             >
                 <div>
                 <input placeholder={placeholder} onChange={this.searchSelect} value={selectVal}/>
-                <Iconfont name="icon"/></div>
+                <IconFont name="icon"/></div>
                 <ul>
                 {
                     dropOptions && dropOptions.map((item,idx)=>{
