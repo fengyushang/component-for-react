@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Router,Route,Switch} from 'react-router';
 import createHistory from 'history/createBrowserHistory';
 import Home from 'views/Home';
+import TestYyd from 'views/TestYyd';
 
 export const history = createHistory();
 
@@ -15,6 +16,7 @@ class App extends React.Component{
                 <Switch>
                     <Route path='/' exact component={Home}/>
                     <Route path='/home' component={Home}/>
+                    <Route path='/test_yyd' component={TestYyd}/>
                 </Switch>
             </Router>
         {/*</Provider>*/}

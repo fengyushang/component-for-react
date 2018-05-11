@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import propTypes from 'prop-types';
 import { autobind } from 'core-decorators';
-import Iconfont from '../../IconFont';
 import '../select.less'
 
 @autobind
@@ -18,8 +17,7 @@ class InputSelect extends Component{
     state = {
         dropDown:true,
         dropOptions:[],
-        selectVal:'',
-        selectPos:-1
+        selectVal:''
     }
     static defaultProps = {
         placeholder:'请输入选项',
@@ -77,7 +75,14 @@ class InputSelect extends Component{
         if(this.selectContainer && !this.selectContainer.contains(ev.target)){
             !this.state.dropDown && this.setState({dropDown:true})
         }
-        this.setState({selectPos:-1})
+        this.pureSelectResuld();
+    }
+    pureSelectResuld(){
+        const {dropOptions,selectVal} = this.state;
+        selectVal == '' && dropOptions.filter((item)=>{
+            return item.active = false;
+        })
+        this.setState({dropOptions:dropOptions});
     }
     searchSelect(ev){
         const {config,name,onChange} = this.props;
@@ -89,8 +94,9 @@ class InputSelect extends Component{
         // onChange(name,res);
     }
     autoResult(res,arr){
-        arr.length > 0 && res!='' ? (this.setState({selectPos:0})) : 
-        (this.setState({selectPos:''}));
+        const {name,onChange,config} = this.props;
+        arr.length > 0 && res!='' ? (arr[0].active = true) : 
+        (arr.filter((item)=>{return item.active = false}));
         return arr;
     }
     mouseLi(idx){
