@@ -2,7 +2,7 @@ import React from 'react';
 import 'components/style/main.less';
 import Button from 'components/Button';
 import {message,Input,Pagination,Row,Col} from '../../components';
-import Select,{InputSelect} from 'components/Select';
+import {InputSelect} from 'components/Select';
 import {autobind} from 'core-decorators';
 import './style.less';
 
@@ -40,11 +40,12 @@ export default class Home extends React.Component {
                 <div className="clearfix">
                 <div className="fl">
                     常规下拉框：
-                    <Select
+                    <InputSelect
                         name="demo"
                         value={demo}
                         onChange={this.change}
-                        placeholder='请输入选项'                        
+                        placeholder='请输入选项'     
+                        readOnly={true}                   
                         config={{
                             options:[{
                                 label:'选项A',
