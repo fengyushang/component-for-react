@@ -4,6 +4,7 @@ import Button from 'components/Button';
 import {InputSelect} from 'components/Select';
 import {message, Input, Pagination, Row, Col} from '../../components';
 import Tipsy from 'components/Tipsy';
+import Pre from 'components/Pre';
 import {autobind} from 'core-decorators';
 import './style.less';
 
@@ -27,9 +28,23 @@ export default class Home extends React.Component {
         return <div className='home-page'>
             <div className='rightContent'>
                 <Button label="确定" sureBtn/>
+                <Pre
+                    code={
+                        `<Button label="确定" sureBtn/>`
+                    }
+                />
                 <Button label="禁止" sureBtn disabled/>
+                <Pre
+                    code={`<Button label="禁止" sureBtn disabled/>`}
+                />
                 <Button label="取消" cancelBtn/>
+                <Pre
+                    code={`<Button label="取消" cancelBtn/>`}
+                />
                 <Button label="禁止" cancelBtn disabled/>
+                <Pre code={
+                    `<Button label="禁止" cancelBtn disabled/>`} 
+    />
             </div>
             <div>
                 <Input name='input1'
@@ -38,6 +53,7 @@ export default class Home extends React.Component {
                        placeholder='提示信息'
                        unit='美元'
                 />
+
             </div>
             <div className="clearfix">
                 <div className="fl">
@@ -55,10 +71,28 @@ export default class Home extends React.Component {
                             }, {
                                 label: '选项B',
                                 value: 2
-                            }],
-                        }
-                        }
+                            }]
+                        }}
                     />
+                    <Pre
+                        code={
+`<InputSelect
+    name="demo"
+    value={demo}
+    onChange={this.change}
+    placeholder='请输入选项'     
+    readOnly={true}                   
+    config={{
+        options: [{
+            label: '选项A',
+            value: 1
+        }, {
+            label: '选项B',
+            value: 2
+        }]
+    }}
+/>  
+`}/>
                 </div>
                 <div className="fl" style={{'marginLeft': '20px'}}>
                     可输入下拉框：
@@ -85,11 +119,38 @@ export default class Home extends React.Component {
                             }, {
                                 label: '毛泽东',
                                 value: 6
-                            }],
-                        }
-                        }
+                            }]
+                        }}
                     />
-
+                    <Pre
+                        code={
+`<InputSelect
+    name="demo2"
+    value={demo2}
+    onChange={this.change}
+    config={{
+        options: [{
+            label: '选项A',
+            value: 1
+        }, {
+            label: '选项B',
+            value: 2
+        }, {
+            label: '东方鸿',
+            value: 3
+        }, {
+            label: '太阳升',
+            value: 4
+        }, {
+            label: '西边冒出个',
+            value: 5
+        }, {
+            label: '毛泽东',
+            value: 6
+        }]
+    }}
+/>
+`}/>
                 </div>
             </div>
             <div style={{'clear': 'both'}}>
