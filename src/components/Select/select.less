@@ -2,10 +2,17 @@
 @import '../style/color.less';
 
 @select-indent:12px;
+@placeholderColor:#666;
 .select-comp{
     position: relative;
     width:200px;
     background: @white-color;
+    ::-webkit-input-placeholder{
+        color:@placeholderColor;
+    }
+    ::-moz-placeholder,::-moz-placeholder,:-ms-input-placeholder{
+        color:@placeholderColor;
+    }
     span,input{
         border:1px solid #ddd;
         display: inline-block;
