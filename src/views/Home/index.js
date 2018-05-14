@@ -75,23 +75,22 @@ export default class Home extends React.Component {
                     />
                     <Pre
                         code={
-                            `<InputSelect
-                                name="demo"
-                                value={demo}
-                                onChange={this.change}
-                                placeholder='请输入选项'     
-                                readOnly={true}                   
-                                config={{
-                                    options: [{
-                                        label: '选项A',
-                                        value: 1
-                                    }, {
-                                        label: '选项B',
-                                        value: 2
-                                    }]
-                                }}
-                            />  
-                            `}/>
+`<InputSelect
+    name="demo"
+    value={demo}
+    onChange={this.change}
+    placeholder='请输入选项'     
+    readOnly={true}                   
+    config={{
+        options: [{
+            label: '选项A',
+            value: 1
+        }, {
+            label: '选项B',
+            value: 2
+        }]
+    }}
+/>`}/>
                 </div>
                 <div style={{'marginTop': '20px'}}>
                     可输入下拉框：
@@ -123,33 +122,32 @@ export default class Home extends React.Component {
                     />
                     <Pre
                         code={
-                            `<InputSelect
-                                name="demo2"
-                                value={demo2}
-                                onChange={this.change}
-                                config={{
-                                    options: [{
-                                        label: '选项A',
-                                        value: 1
-                                    }, {
-                                        label: '选项B',
-                                        value: 2
-                                    }, {
-                                        label: '东方鸿',
-                                        value: 3
-                                    }, {
-                                        label: '太阳升',
-                                        value: 4
-                                    }, {
-                                        label: '西边冒出个',
-                                        value: 5
-                                    }, {
-                                        label: '毛泽东',
-                                        value: 6
-                                    }]
-                                }}
-                            />
-                            `}/>
+`<InputSelect
+    name="demo2"
+    value={demo2}
+    onChange={this.change}
+    config={{
+        options: [{
+            label: '选项A',
+            value: 1
+        }, {
+            label: '选项B',
+            value: 2
+        }, {
+            label: '东方鸿',
+            value: 3
+        }, {
+            label: '太阳升',
+            value: 4
+        }, {
+            label: '西边冒出个',
+            value: 5
+        }, {
+            label: '毛泽东',
+            value: 6
+        }]
+    }}
+/> `}/>
                 </div>
             </Panel>
             <Panel title='分页'>
