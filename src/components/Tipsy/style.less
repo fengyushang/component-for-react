@@ -20,7 +20,6 @@
     border-radius: 4px;
     line-height: 20px;
     word-break: break-all;
-    background: linear-gradient(to right, @tipsy-text-bac-fir, @tipsy-text-bac-sec);
     color: #fff;
     z-index: 20;
     &:hover{
@@ -31,6 +30,7 @@
     .tipsy-text{
       left: -18px;
       bottom: 35px;
+      background: linear-gradient(to top, @tipsy-text-bac-fir, @tipsy-text-bac-sec);
       &:after {
         content: "";
         position: absolute;
@@ -46,6 +46,7 @@
     .tipsy-text{
       left: 35px;
       top: -15px;
+      background: linear-gradient(to right, @tipsy-text-bac-fir, @tipsy-text-bac-sec);
       &:before {
         content: "";
         position: absolute;
@@ -62,6 +63,7 @@
     .tipsy-text{
       left: -18px;
       top: 35px;
+      background: linear-gradient(to bottom, @tipsy-text-bac-fir, @tipsy-text-bac-sec);
       &:before {
         content: "";
         position: absolute;
@@ -78,6 +80,7 @@
     .tipsy-text{
       right: 30px;
       top: -10px;
+      background: linear-gradient(to right, @tipsy-text-bac-fir, @tipsy-text-bac-sec);
       &:before {
         content: "";
         position: absolute;
