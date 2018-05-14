@@ -3031,6 +3031,7 @@ export{
 		bind,
 		unBind,
 		htmlFontSize,
+		normalDate,
 		dateFormat0,
 		alerts,
 		soleString32,
@@ -3072,4 +3073,5 @@ export{
 		getPos,
 		HasClass,
 		manyDay,
+		Scroll,
 	};
