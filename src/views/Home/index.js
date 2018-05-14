@@ -55,7 +55,7 @@ export default class Home extends React.Component {
                 />
             </Panel>
             <Panel title='select'>
-                <div>
+                <div style={{"position":"relative","zIndex":"2"}}>
                     常规下拉框：
                     <InputSelect
                         name="demo"
