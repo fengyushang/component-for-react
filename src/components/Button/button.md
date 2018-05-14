@@ -4,7 +4,7 @@
 =====
 
 ```html
-<Button label="确定" sureBtn/>
+<Button label="确定" sureBtn> </Button>
 ```
 
  参数 | 说明 | 类型 | 默认值 | 必需 
