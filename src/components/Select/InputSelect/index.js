@@ -94,7 +94,6 @@ class InputSelect extends Component{
             return item.label.includes(res);
         });
         this.setState({dropOptions:newArr,selectVal:res});
-        // onChange(name,res);
     }
     autoResult(res,arr){
         const {name,onChange,config} = this.props;

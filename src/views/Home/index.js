@@ -16,8 +16,8 @@ export default class Home extends React.Component {
         current: 1,
         demo: '1',
         demo2: '1'
-    };
 
+    }
     change(name, value) {
         this.setState({[name]: value});
     }
