@@ -4,3 +4,4 @@ export {default as Pagination} from './Pagination';
 export {default as message} from './Message';
 export {default as Row} from './Row';
 export {default as Col} from './Col';
+export {default as Panel} from './Panel';

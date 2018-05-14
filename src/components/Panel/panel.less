@@ -1,0 +1,56 @@
+@import '../style/color';
+@panel-title-bg:#f5f5f5;
+@panel-border-default-color: #ddd;
+@panel-bg-default-color: #f5f5f5;
+@panel-border-primary-color: #337ab7;
+@panel-bg-primary-color: #337ab7;
+@panel-border-success-color: #d6e9c6;
+@panel-bg-success-color: #dff0d8;
+@panel-border-info-color: #bce8f1;
+@panel-bg-info-color: #d9edf7;
+@panel-border-warning-color: #faebcc;
+@panel-bg-warning-color: #fcf8e3;
+@panel-border-error-color: #ebccd1;
+@panel-bg-error-color: #f2dede;
+@panel-padding-vertical: 10px;
+@panel-padding-horizontal: 15px;
+.my-panel{
+  background-color: @white-color;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  .panel-title{
+    border-bottom: 1px solid transparent;
+    padding: @panel-padding-vertical @panel-padding-horizontal;
+  }
+  .panel-content{
+    padding: @panel-padding-vertical;
+  }
+  &.panel-default{
+    .panel-variant(@panel-border-default-color,@panel-bg-default-color);
+  }
+  &.panel-primary{
+    color: @white-color;
+    .panel-variant(@panel-border-primary-color,@panel-bg-primary-color);
+  }
+  &.panel-success{
+    .panel-variant(@panel-border-success-color,@panel-bg-success-color);
+  }
+  &.panel-info{
+    .panel-variant(@panel-border-info-color,@panel-bg-info-color);
+  }
+  &.panel-warning{
+    .panel-variant(@panel-border-warning-color,@panel-bg-warning-color);
+  }
+  &.panel-error{
+    .panel-variant(@panel-border-error-color,@panel-bg-error-color);
+  }
+}
+.panel-variant(@border, @background) {
+  border-color: @border;
+  .panel-title{
+    border-color: @border;
+    background-color: @background;
+  }
+}

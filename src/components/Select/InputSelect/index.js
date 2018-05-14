@@ -8,20 +8,22 @@ import IconFont from 'components/IconFont';
 class InputSelect extends Component{
 
     static props = {
-        name:propTypes.string,
-        label:propTypes.string,
+        name:propTypes.string.require,
         value:propTypes.string,
         onChange:propTypes.func.require,
         placeholder:propTypes.string,
+        readOnly:propTypes.bool,
         config:propTypes.object.require
     };
     state = {
         dropDown:true,
         dropOptions:[],
+        selectPos:-1,
         selectVal:''
     }
     static defaultProps = {
         placeholder:'请输入选项',
+        readOnly:false,
         config:{}
     }
     changeItem(name,value,label){
@@ -58,10 +60,10 @@ class InputSelect extends Component{
         if(!this.state.dropDown){
             switch(code){
                 case 38:
-                    selectPos!=='' && selectPos>=0 && this.setState({selectPos:--selectPos});
+                    selectPos!=='' && selectPos>=1 && this.setState({selectPos:--selectPos});
                     break;
                 case 40:
-                    dropOptions.length > 0 && (!selectPos || selectPos < dropOptions.length) && this.setState({selectPos:++selectPos});
+                    dropOptions.length > 0 && selectPos <dropOptions.length-1 && (!selectPos || selectPos < dropOptions.length) && this.setState({selectPos:++selectPos});
                     break;
                 case 13:
                     this.submitSelect();
@@ -91,8 +93,7 @@ class InputSelect extends Component{
         let newArr = config.options.filter((item,idx)=>{
             return item.label.includes(res);
         });
-        this.setState({dropOptions:newArr,selectVal:res});
-        // onChange(name,res);
+        this.setState({dropOptions:newArr,selectVal:res,dropDown:false,selectPos:0});
     }
     autoResult(res,arr){
         const {name,onChange,config} = this.props;
@@ -122,7 +123,7 @@ class InputSelect extends Component{
     }
 
     render(){
-        const {name,label,config,value,placeholder} = this.props;
+        const {name,label,config,value,placeholder,readOnly} = this.props;
         const {dropDown,dropOptions,selectPos,selectVal} = this.state;
         const borderCls = dropDown ? '' : 'blueBorder';
         const res = this.getHeaderBox();
@@ -131,7 +132,7 @@ class InputSelect extends Component{
                 ref={(container)=>{this.selectContainer=container}}
             >
                 <div>
-                <input placeholder={placeholder} onChange={this.searchSelect} value={selectVal}/>
+                <input placeholder={placeholder} onChange={this.searchSelect} value={selectVal} readOnly={readOnly}/>
                 <IconFont name="icon"/></div>
                 <ul>
                 {

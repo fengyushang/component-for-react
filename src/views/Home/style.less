@@ -1,8 +1,11 @@
+@import '../../components/style/size.less';
 .home-page{
-  >div{
-    margin-top: 20px;
+  padding: 15px;
+  margin-left: @sideBarWidth+10;
+  .my-panel{
+    margin-bottom: 10px;
   }
-  .my-row{
+  .row-test{
     >div{
       color: #fff;
       text-align: center;
@@ -25,4 +28,13 @@
 }
 .fl{
   float: left;
+}
+.clearfix{
+  display: block;
+  &:after{
+    content:'';
+    display: block;
+    clear: both;
+    height:0;
+  }
 }
