@@ -13,7 +13,7 @@ export default class Home extends React.Component {
         total: 112,
         pageSize: 20,
         current: 1,
-        demo:'1',
+        demo:'',
         demo2:'1'
     };
 
