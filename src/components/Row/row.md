@@ -9,3 +9,4 @@
 | align | 垂直对齐方式：top middle bottom | string | - | 否 |
 | justify | 水平排列方式：start end center space-around space-between | string | start | 否 |
 | gutter | 栅格间隔(px) | number | 0 | 否 |
+| className | 样式 | string | '' | 否 |

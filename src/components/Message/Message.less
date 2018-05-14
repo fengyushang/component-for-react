@@ -2,7 +2,7 @@
 @import '../style/color';
 #message-container{
   position: fixed;
-  top: 100px;
+  top: 50px;
   z-index: 9999;
   left: 50%;
   transform: translate(-50%,0);
@@ -14,7 +14,7 @@
     margin-bottom: @message-margin-bottom;
     border-radius: @message-border-radius;
     position: relative;
-    animation: showMessage .7s , hideMessage .7s 2.4s;
+    animation: showMessage .6s, hideMessage .6s 2.5s;
     &.message-success{
       .message-variant(@message-success-bg; @message-success-border);
     }
@@ -48,16 +48,20 @@
 @keyframes showMessage {
   0%{
     opacity: 0;
+    top: -50px;
   }
   100%{
+    top: 0;
     opacity: 1;
   }
 }
 @keyframes hideMessage {
   0%{
     opacity: 1;
+    top: 0;
   }
   100%{
     opacity: 0;
+    top: -50px;
   }
 }

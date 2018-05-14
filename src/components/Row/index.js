@@ -7,13 +7,15 @@ export default class Row extends React.Component{
         align: PropTypes.string,
         justify: PropTypes.number,
         gutter: PropTypes.bool,
+        className: PropTypes.string,
     };
     static defaultProps = {
         justify: 'start',
         gutter: 0,
+        className: '',
     };
     render(){
-        const {align,justify,gutter} = this.props;
+        const {align,justify,gutter,className} = this.props;
         const alignTransfer = {
             'top':'flex-start',
             'middle':'center',
@@ -26,7 +28,7 @@ export default class Row extends React.Component{
             'space-between':'space-between',
             'space-around':'space-around',
         };
-        return <div className='my-row' style={{alignItems: alignTransfer[align],justifyContent:justifyTransfer[justify]}}>
+        return <div className={'my-row '+className} style={{alignItems: alignTransfer[align],justifyContent:justifyTransfer[justify]}}>
             <GutterContext.Provider value={gutter}>
                 {this.props.children}
             </GutterContext.Provider>
