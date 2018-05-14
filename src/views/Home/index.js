@@ -37,7 +37,9 @@ export default class Home extends React.Component {
                         unit='美元'
                     />
                 </div>
+                <div className="clearfix">
                 <div className="fl">
+                    常规下拉框：
                     <Select
                         name="demo"
                         value={demo}
@@ -56,6 +58,7 @@ export default class Home extends React.Component {
                     />
                 </div>
                 <div className="fl" style={{'marginLeft':'20px'}}>
+                可输入下拉框：
                 <InputSelect
                         name="demo2"
                         value={demo2}
@@ -84,6 +87,7 @@ export default class Home extends React.Component {
                         }
                     />
                 
+                </div>
                 </div>
             <div style={{'clear':'both'}}>
                 <Pagination total={total}
