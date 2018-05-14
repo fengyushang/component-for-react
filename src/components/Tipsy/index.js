@@ -7,7 +7,7 @@ import './style.less';
 export default class Tipsy extends React.Component {
     static props={
         className:PropTypes.string,
-        tipsyText:PropTypes.string,
+        tipsyText:PropTypes.string.isRequired,
         placement:PropTypes.string
     };
     static defaultProps={
