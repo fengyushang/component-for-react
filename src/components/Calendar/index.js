@@ -130,35 +130,67 @@ export default class Calendar extends React.Component{
 
     selectDay(select,item,index){
         let {dayArr1,dayArr2,select1,select2}=this.state;
+        let setIndex=-1;
 
-        console.log(select,item,index);
-        function selectIndex(){
-            if(select1.index==-1||index<=select2.index&&select2.select==1){
-                select1.select=select;
-                select1.index=index;
-            }else{
-                select2.select=select;
-                select2.index=index;
+        if(item.class.indexOf('currentMonth')!=-1){
+            function selectIndex(){
+                if(select1.index==index){
+                    select1.index=-1;
+                    setIndex=-1;
+                }else if(select2.index==index){
+                    select2.index=-1;
+                    setIndex=-1;
+                }else{
+                    if(select1.index==-1){
+                        select1.select=select;
+                        select1.index=index;
+                        setIndex=1;
+                    }else{
+                        select2.select=select;
+                        select2.index=index;
+                        setIndex=2;
+                    }
+                }
+            };
+
+            if(dayArr1[index].class.indexOf('currentMonth')!=-1||dayArr2[index].class.indexOf('currentMonth')!=-1){
+                selectIndex();
             }
-        };
 
-        if(dayArr1[index].class.indexOf('currentMonth')!=-1||dayArr2[index].class.indexOf('currentMonth')!=-1){
-            selectIndex();
+            console.log(select1,select2);
+
+            function getDay(){
+                let day={};
+
+                if(select1.index!=-1||select2.index!=-1){
+                    if(select1.select==1&&select2.select==2){
+                        day=setIndex==1?dayArr1[select1.index<select2.index?select1.index:select2.index]:dayArr2[select1.index>select2.index?select1.index:select2.index];
+                    }else if(select1.select==2&&select2.select==1){
+                        day=setIndex==1?dayArr2[select1.index<select2.index?select1.index:select2.index]:dayArr1[select1.index>select2.index?select1.index:select2.index];
+                    }else if(select1.select==1){
+                        day=setIndex==1?dayArr1[select2.index==-1||select1.index<select2.index?select1.index:select2.index]:dayArr1[select1.index>select2.index?select1.index:select2.index];
+                    }else if(select1.select==2){
+                        day=setIndex==1?dayArr2[select2.index==-1||select1.index<select2.index?select1.index:select2.index]:dayArr2[select1.index>select2.index?select1.index:select2.index];
+                    }
+                }
+
+                return day.text;
+            };
+
+            console.log(setIndex,getDay());
+            this.setState({
+                select1,
+                select2,
+                ['day'+setIndex]:setIndex!=-1?getDay():this.state['day'+setIndex],
+            });
         }
-
-        this.setState({
-            ['day'+index]:item,
-            select1,
-            select2,
-        });
-        console.log(select1,select2);
     }
 
     selectAcross(select,item,index){
         let className=item.class;
         let {select1,select2}=this.state;
 
-        if(className.indexOf('currentMonth')==-1){
+        if(className.indexOf('currentMonth')!=-1){
             if(className.indexOf('select')==-1){
                 if(select1.select==select&&select1.index==index||select2.select==select&&select2.index==index){
                     className+=' select';
@@ -166,8 +198,18 @@ export default class Calendar extends React.Component{
             }
 
             if(className.indexOf('across')==-1&&select1.index!=-1&&select2.index!=-1){
-                if(index>select1.index&&index<select2.index){
-                    className+=' across';
+                if(select1.select==1&&select2.select==2){
+                    if(select==1&&index>select1.index||select==2&&index<select2.index){
+                        className+=' across';
+                    }
+                }else if(select1.select==2&&select2.select==1){
+                    if(select==1&&index>select2.index||select==2&&index<select1.index){
+                        className+=' across';
+                    }
+                }else if(select1.select==select||select2.select==select){
+                    if(index>select1.index&&index<select2.index||index<select1.index&&index>select2.index){
+                        className+=' across';
+                    }
                 }
             }
         }
