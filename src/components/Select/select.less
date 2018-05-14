@@ -18,6 +18,15 @@
         outline:0;
         text-indent: @select-indent;
     }
+    .iconfont{
+        position: absolute;
+        right: 6px;
+        text-align: center;
+        text-indent: 0;
+        color:@input-default-border;
+        transform: scale(.5);
+        line-height: @input-height;
+    }
     ul{
         position: absolute;
         width: 100%;
@@ -51,6 +60,7 @@
         }
         ul{
             display: block;
+            min-height: @input-height;
         }
     }
 }

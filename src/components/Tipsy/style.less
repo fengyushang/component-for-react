@@ -1,0 +1,93 @@
+@import "../style/color";
+.tipsy{
+  position: relative;
+  i{
+    font-size: 14px;
+    color: @tipsy-text-icon-color;
+    margin-left: 3px;
+    &:hover{
+      &+.tipsy-text{
+        display: block;
+      }
+    }
+  }
+  .tipsy-text{
+    display: none;
+    font-size: 12px;
+    position: absolute;
+    width: 267px;
+    padding: 15px;
+    border-radius: 4px;
+    line-height: 20px;
+    word-break: break-all;
+    background: linear-gradient(to right, @tipsy-text-bac-fir, @tipsy-text-bac-sec);
+    color: #fff;
+    z-index: 20;
+    &:hover{
+      display: block;
+    }
+  }
+  &.top{
+    .tipsy-text{
+      left: -18px;
+      bottom: 35px;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -13px;
+        left: 18px;
+        border-top: 15px solid @tipsy-text-bac-fir;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
+    }
+  }
+  &.right{
+    .tipsy-text{
+      left: 35px;
+      top: -15px;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 15px;
+        left: -21px;
+        border-right: 15px solid @tipsy-text-bac-fir;
+        border-left: 8px solid transparent;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+      }
+    }
+  }
+  &.bottom{
+    .tipsy-text{
+      left: -18px;
+      top: 35px;
+      &:before {
+        content: "";
+        position: absolute;
+        top:-23px;
+        left: 20px;
+        border-right: 8px solid transparent;
+        border-left: 8px solid transparent;
+        border-top: 8px solid transparent;
+        border-bottom: 15px solid @tipsy-text-bac-fir;
+      }
+    }
+  }
+  &.left{
+    .tipsy-text{
+      right: 30px;
+      top: -10px;
+      &:before {
+        content: "";
+        position: absolute;
+        top:10px;
+        right: -23px;
+        border-right: 8px solid transparent;
+        border-left: 15px solid @tipsy-text-bac-sec;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+      }
+    }
+  }
+}

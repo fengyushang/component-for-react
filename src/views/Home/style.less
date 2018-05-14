@@ -26,3 +26,12 @@
 .fl{
   float: left;
 }
+.clearfix{
+  display: block;
+  &:after{
+    content:'';
+    display: block;
+    clear: both;
+    height:0;
+  }
+}
