@@ -28,23 +28,13 @@ export default class Home extends React.Component {
         return <div className='home-page'>
             <Panel title='按钮' className='rightContent'>
                 <Button label="确定" sureBtn/>
-                <Pre
-                    code={
-                        `<Button label="确定" sureBtn/>`
-                    }
-                />
+                <Pre code={`<Button label="确定" sureBtn/>`}/>
                 <Button label="禁止" sureBtn disabled/>
-                <Pre
-                    code={`<Button label="禁止" sureBtn disabled/>`}
-                />
+                <Pre code={`<Button label="禁止" sureBtn disabled/>`}/>
                 <Button label="取消" cancelBtn/>
-                <Pre
-                    code={`<Button label="取消" cancelBtn/>`}
-                />
+                <Pre code={`<Button label="取消" cancelBtn/>`}/>
                 <Button label="禁止" cancelBtn disabled/>
-                <Pre code={
-                    `<Button label="禁止" cancelBtn disabled/>`}
-                />
+                <Pre code={`<Button label="禁止" cancelBtn disabled/>`}/>
             </Panel>
             <Panel title='input输入框'>
                 <Input name='input1'
@@ -53,6 +43,13 @@ export default class Home extends React.Component {
                        placeholder='提示信息'
                        unit='美元'
                 />
+                <Pre code={
+                    `<Input name='input1'
+                       value={input1}
+                       onChange={(name, value) => this.setState({input1: value})}
+                       placeholder='提示信息'
+                       unit='美元'
+                />`}/>
             </Panel>
             <Panel title='select'>
                 <div style={{"position":"relative","zIndex":"2"}}>
@@ -162,12 +159,22 @@ export default class Home extends React.Component {
                         next: '下一页',
                     }}*/
                             border={false}/>
+                <Pre code={`<Pagination total={total}
+                    pageSize={pageSize}
+                    current={current}
+                    onChange={(pageSize, pageNum) => this.setState({current: pageNum})}
+                border={false}/>
+                `}/>
             </Panel>
             <Panel title='message信息'>
                 <Button label="success" sureBtn onClick={() => message.success('success')}/>
+                <Pre code={`<Button label="success" sureBtn onClick={() => message.success('success')}/>`}/>
                 <Button label="info" sureBtn onClick={() => message.info('info')}/>
+                <Pre code={`<Button label="info" sureBtn onClick={() => message.info('info')}/>`}/>
                 <Button label="warning" sureBtn onClick={() => message.warning('warning')}/>
+                <Pre code={`<Button label="warning" sureBtn onClick={() => message.warning('warning')}/>`}/>
                 <Button label="error" sureBtn onClick={() => message.error('error')}/>
+                <Pre code={`<Button label="error" sureBtn onClick={() => message.error('error')}/>`}/>
             </Panel>
             <Panel title='悬浮提示框'>
                 <div style={{paddingLeft: '300px'}}>
