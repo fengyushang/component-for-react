@@ -105,7 +105,7 @@ export default class Home extends React.Component {
                 <Button label="warning" sureBtn onClick={()=>message.warning('warning')}/>
                 <Button label="error" sureBtn onClick={()=>message.error('error')}/>
             </div>
-            <Row gutter={8}>
+            <Row gutter={8} className='row-test'>
                 <Col span={3}>
                     <div>1</div>
                 </Col>
