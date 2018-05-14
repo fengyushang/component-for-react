@@ -11,15 +11,19 @@ export default class Col extends React.Component {
         md: PropTypes.number,
         lg: PropTypes.number,
         xl: PropTypes.number,
+        className: PropTypes.string,
     };
-
+    static defaultProps = {
+        className: '',
+    };
     render() {
-        let {span, xs, sm, md, lg, xl} = this.props;
+        let {span, xs, sm, md, lg, xl, className} = this.props;
         span = span || xl || lg || md || sm || xs;
         return <GutterContext.Consumer>
             {
                 gutter => <div className={
-                    (span ? `my-col-${span}` : '')
+                    className
+                    + (span ? ` my-col-${span}` : '')
                     + (xs ? ` my-col-xs-${xs}` : '')
                     + (sm ? ` my-col-sm-${sm}` : '')
                     + (md ? ` my-col-md-${md}` : '')

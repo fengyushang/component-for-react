@@ -121,7 +121,7 @@ export default class Home extends React.Component {
                 <Tipsy tipsyText='有一种疑问叫噶哈，有一种习惯叫埋汰，有一种聊天叫唠嗑，有一种速度叫麻溜，有一种愤怒叫急眼，有一种喜欢叫稀罕，有一种厉害叫尿性，有一种傻叫得儿呵，有一种心情叫憋屈，'
                        placement='left'/>
             </div>
-            <Row gutter={8}>
+            <Row gutter={8} className='row-test'>
                 <Col span={3}>
                     <div>1</div>
                 </Col>
