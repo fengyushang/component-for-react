@@ -24,6 +24,12 @@ export default class TestYyd extends React.Component{
                         console.log(date);
                     }}
                 />
+
+                <Calendar
+                    update={(date)=>{
+                        console.log(date);
+                    }}
+                />
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import {autobind} from 'core-decorators';
 import PropTypes from 'prop-types';
 import {toTwo,manyDay,normalDate,dateFormat0,Scroll} from 'js/yydjs';
+import CalendarArr from './CalendarArr';
 import './style.less';
 
 @autobind
@@ -23,6 +24,14 @@ export default class Calendar extends React.Component{
         endDate:'',//默认结束时间
         update:()=>{},//选择时间后的回调函数，参数为格式化后的日期
     }
+
+    /*
+        <Calendar
+            update={(date)=>{
+                console.log(date);
+            }}
+        />
+    */
 
     constructor(props){
         super(props);
@@ -79,6 +88,8 @@ export default class Calendar extends React.Component{
         this.hoursWrap2=null;
         this.minutesWrap2=null;
         this.secondsWrap2=null;
+
+        CalendarArr.push(this);
     }
 
     componentWillMount(){
@@ -91,6 +102,18 @@ export default class Calendar extends React.Component{
         this.createDay(1);
         this.createDay(2);
         this.createTime();
+    }
+
+    componentWillUnmount(){
+        CalendarArr.splice(0,CalendarArr.length);
+    }
+
+    closeAll(){
+        for(let value of CalendarArr){
+            value.setState({
+                showCalendar:false,
+            });
+        }
     }
 
     refreshNow(){
@@ -156,7 +179,6 @@ export default class Calendar extends React.Component{
                 class:'day lastMonth',
             });
         }
-        console.log(lastMonth);
 
         for(let i=1;i<currentMaxDay+1;i++){
             currentMonth.push({
@@ -164,7 +186,6 @@ export default class Calendar extends React.Component{
                 class:'day currentMonth',
             });
         }
-        console.log(currentMonth);
 
         for(let i=1;i<length-lastMonth.length-currentMonth.length+1;i++){
             nextMonth.push({
@@ -172,7 +193,6 @@ export default class Calendar extends React.Component{
                 class:'day nextMonth',
             });
         }
-        console.log(nextMonth);
 
         this.setState({
             ['dayArr'+index]:[].concat(weekArr,lastMonth,currentMonth,nextMonth),
@@ -238,8 +258,6 @@ export default class Calendar extends React.Component{
                 selectIndex();
             }
 
-            console.log(select1,select2);
-
             function getDay(){
                 let dayArr=[];
 
@@ -281,7 +299,6 @@ export default class Calendar extends React.Component{
                 return dayArr;
             };
 
-            console.log(getDay());
             this.setState({
                 select1,
                 select2,
@@ -474,6 +491,7 @@ export default class Calendar extends React.Component{
                 <div
                     className="CalendarSelect"
                     onClick={(ev)=>{
+                        this.closeAll();
                         this.setState({
                             showCalendar:!showCalendar,
                         });
@@ -595,6 +613,8 @@ export default class Calendar extends React.Component{
 
                                     outputDate.startDate=dateFormat0(year1+'/'+month1+'/'+day1+' '+hours1+':'+minutes1+':'+seconds1,format);
                                     outputDate.endDate=dateFormat0(year2+'/'+month2+'/'+day2+' '+hours2+':'+minutes2+':'+seconds2,format);
+
+                                    this.closeAll();
                                     this.setState({
                                         showCalendar:false,
                                         startTime:outputDate.startDate,
