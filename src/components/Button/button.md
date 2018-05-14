@@ -4,11 +4,11 @@
 =====
 
 ```html
-<Button label="确定" sureBtn> </Button>
+<Button label="确定" sureBtn></Button>
 ```
 
  参数 | 说明 | 类型 | 默认值 | 必需 
- :---- | :---- | :---- | :---- | :---- | :---- 
+ :---- | :---- | :---- | :---- | :---- 
  label | 按钮文本 | string | button | 否 
  type | 按钮类型 | string | button | 否 
  sureBtn | 是否是确定按钮样式 | bool | - | 否 
