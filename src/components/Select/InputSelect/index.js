@@ -18,6 +18,7 @@ class InputSelect extends Component{
     state = {
         dropDown:true,
         dropOptions:[],
+        selectPos:-1,
         selectVal:''
     }
     static defaultProps = {
@@ -61,6 +62,7 @@ class InputSelect extends Component{
                     selectPos!=='' && selectPos>=0 && this.setState({selectPos:--selectPos});
                     break;
                 case 40:
+                    console.log('down',selectPos);
                     dropOptions.length > 0 && (!selectPos || selectPos < dropOptions.length) && this.setState({selectPos:++selectPos});
                     break;
                 case 13:
