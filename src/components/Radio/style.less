@@ -1,0 +1,50 @@
+@import "../style/color";
+.radio{
+  .radio-item{
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+    .radio-label{
+      color: @main-font;
+    }
+    &:hover{
+      .icon-Oval1{
+        color: @blue-button-bac;
+
+      }
+    }
+
+    i{
+      font-size: 14px;
+      margin-right: 5px;
+      &.icon-OvalCopy{
+        color: @blue-button-bac;
+      }
+      &.icon-Oval1{
+        color: @grey-button-bac;
+      }
+    }
+    &.disabled{
+      .icon-Oval{
+        border: 1px solid @pagination-border-color-default;
+        border-radius: 50%;
+        background: @radio-color;
+        color: @radio-color;
+        font-size: 13px;
+      }
+      .icon-OvalCopy{
+        color: #ccc;
+      }
+      &:hover {
+        cursor: not-allowed;
+        .icon-Oval {
+          color: @radio-color;
+        }
+      }
+
+      span{
+        color: @radio-disabled-text;
+      }
+    }
+  }
+}

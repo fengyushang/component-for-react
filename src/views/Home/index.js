@@ -2,6 +2,7 @@ import React from 'react';
 import 'components/style/main.less';
 import Button from 'components/Button';
 import {message, Input, Pagination, Row, Col, Panel} from '../../components';
+import Radio from 'components/Radio';
 import Select, {InputSelect} from 'components/Select';
 import Tipsy from 'components/Tipsy';
 import Pre from 'components/Pre';
@@ -16,15 +17,16 @@ export default class Home extends React.Component {
         pageSize: 20,
         current: 1,
         demo: '1',
-        demo2: '1'
+        demo2: '1',
+        radio: '',
+    };
 
-    }
     change(name, value) {
         this.setState({[name]: value});
     }
 
     render() {
-        const {input1, total, pageSize, current, demo, demo2} = this.state;
+        const {input1, total, pageSize, current, demo, demo2, radio} = this.state;
         return <div className='home-page'>
             <Panel title='按钮' className='rightContent'>
                 <Button label="确定" sureBtn/>
@@ -52,7 +54,7 @@ export default class Home extends React.Component {
                 />`}/>
             </Panel>
             <Panel title='select'>
-                <div style={{"position":"relative","zIndex":"2"}}>
+                <div style={{"position": "relative", "zIndex": "2"}}>
                     常规下拉框：
                     <InputSelect
                         name="demo"
@@ -72,7 +74,7 @@ export default class Home extends React.Component {
                     />
                     <Pre
                         code={
-`<InputSelect
+                            `<InputSelect
     name="demo"
     value={demo}
     onChange={this.change}
@@ -119,7 +121,7 @@ export default class Home extends React.Component {
                     />
                     <Pre
                         code={
-`<InputSelect
+                            `<InputSelect
     name="demo2"
     value={demo2}
     onChange={this.change}
@@ -183,11 +185,15 @@ export default class Home extends React.Component {
                     <Pre code={`<Tipsy tipsyText='你瞅啥？瞅你咋地！'/>`}/>
                     <Tipsy tipsyText='波棱盖卡马路牙子上，卡秃噜皮了' placement='right'/>
                     <Pre code={`<Tipsy tipsyText='波棱盖卡马路牙子上，卡秃噜皮了' placement='right'/>`}/>
-                    <Tipsy tipsyText='有一种回答叫嗯哪,有一种解决叫咋整,　有一种浪费叫霍霍，有一种重复叫磨叽，有一种状况叫毛楞,有一种面貌叫磕碜，有一种讨厌叫咯应,有一种观察叫撒漠,有一种掩护叫打狼,有一种为人叫得瑟,'
+                    <Tipsy
+                        tipsyText='有一种回答叫嗯哪,有一种解决叫咋整,　有一种浪费叫霍霍，有一种重复叫磨叽，有一种状况叫毛楞,有一种面貌叫磕碜，有一种讨厌叫咯应,有一种观察叫撒漠,有一种掩护叫打狼,有一种为人叫得瑟,'
                         placement='bottom'/>
-                    <Pre code={`<Tipsy tipsyText='有一种回答叫嗯哪,有一种解决叫咋整,　有一种浪费叫霍霍，有一种重复叫磨叽，有一种状况叫毛楞,有一种面貌叫磕碜，有一种讨厌叫咯应,有一种观察叫撒漠,有一种掩护叫打狼,有一种为人叫得瑟,'  placement='bottom'/>`}/>
-                    <Tipsy tipsyText='有一种疑问叫噶哈，有一种习惯叫埋汰，有一种聊天叫唠嗑，有一种速度叫麻溜，有一种愤怒叫急眼，有一种喜欢叫稀罕，有一种厉害叫尿性，有一种傻叫得儿呵，有一种心情叫憋屈，' placement='left'/>
-                    <Pre code={`<Tipsy tipsyText='有一种疑问叫噶哈，有一种习惯叫埋汰，有一种聊天叫唠嗑，有一种速度叫麻溜，有一种愤怒叫急眼，有一种喜欢叫稀罕，有一种厉害叫尿性，有一种傻叫得儿呵，有一种心情叫憋屈，' placement='left'/>`}/>
+                    <Pre
+                        code={`<Tipsy tipsyText='有一种回答叫嗯哪,有一种解决叫咋整,　有一种浪费叫霍霍，有一种重复叫磨叽，有一种状况叫毛楞,有一种面貌叫磕碜，有一种讨厌叫咯应,有一种观察叫撒漠,有一种掩护叫打狼,有一种为人叫得瑟,'  placement='bottom'/>`}/>
+                    <Tipsy tipsyText='有一种疑问叫噶哈，有一种习惯叫埋汰，有一种聊天叫唠嗑，有一种速度叫麻溜，有一种愤怒叫急眼，有一种喜欢叫稀罕，有一种厉害叫尿性，有一种傻叫得儿呵，有一种心情叫憋屈，'
+                           placement='left'/>
+                    <Pre
+                        code={`<Tipsy tipsyText='有一种疑问叫噶哈，有一种习惯叫埋汰，有一种聊天叫唠嗑，有一种速度叫麻溜，有一种愤怒叫急眼，有一种喜欢叫稀罕，有一种厉害叫尿性，有一种傻叫得儿呵，有一种心情叫憋屈，' placement='left'/>`}/>
                 </div>
             </Panel>
             <Panel title='栅栏'>
@@ -202,7 +208,7 @@ export default class Home extends React.Component {
                         <div>3</div>
                     </Col>
                 </Row>
-                <Pre code={`                <Row gutter={8} className='row-test'>
+                <Pre code={`<Row gutter={8} className='row-test'>
                     <Col span={3}>
                         <div>1</div>
                     </Col>
@@ -213,6 +219,32 @@ export default class Home extends React.Component {
                         <div>3</div>
                     </Col>
                 </Row>`}/>
+            </Panel>
+            <Panel title='Radio单选按钮'>
+                <Radio
+                    name='radio'
+                    value={radio}
+                    onChange={this.change}
+                    config={{
+                        options: [
+                            {label: '三级头', value: 0, disabled: true},
+                            {label: '三级甲', value: 1},
+                            {label: 'Kar98k', value: 2},
+                        ]
+                    }}
+                />
+                <Pre code={`<Radio
+                    name='radio'
+                    value={radio}
+                    onChange={this.change}
+                    config={{
+                        options:[
+                            {label:'三级头',value:0,disabled:true},
+                            {label:'三级包',value:1},
+                            {label:'Kar98k',value:2},
+                        ]
+                    }}
+                    />`}/>
             </Panel>
         </div>
     }
