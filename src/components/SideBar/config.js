@@ -1,5 +1,5 @@
 const PARAMS = [{
-    pNode:{label:'商品信息'},
+    pNode:{label:'商品信息',icon:'Commodity_management'},
     cNode:[{
         label:'商品列表',
         url:'www.baidu.com'
@@ -17,7 +17,7 @@ const PARAMS = [{
         url:'www.baidu.com'
     }]
 },{
-    pNode:{label:'用户信息'},
+    pNode:{label:'用户信息',icon:'user_management'},
     cNode:[{
         label:'用户列表',
         url:'www.baidu.com'
@@ -29,7 +29,7 @@ const PARAMS = [{
         url:'www.baidu.com'
     }]
 },{
-    pNode:{label:'资金信息'},
+    pNode:{label:'资金信息',icon:'fund_management'},
     cNode:[{
         label:'充值管理',
         url:'www.baidu.com'
@@ -47,7 +47,7 @@ const PARAMS = [{
         url:'www.baidu.com'
     }]
 },{
-    pNode:{label:'订单信息'},
+    pNode:{label:'订单信息',icon:'Trading_rules'},
     cNode:[{
         label:'现货订单',
         url:'www.baidu.com'
@@ -65,7 +65,7 @@ const PARAMS = [{
         url:'www.baidu.com'
     }]
 },{
-    pNode:{label:'运营信息'},
+    pNode:{label:'运营信息',icon:'Order_management'},
     cNode:[{
         label:'资讯管理',
         url:'www.baidu.com'
@@ -77,7 +77,7 @@ const PARAMS = [{
         url:'www.baidu.com'
     }]
 },{
-    pNode:{label:'系统配置'},
+    pNode:{label:'系统配置',icon:'icon2'},
     cNode:[{
         label:'系统设置',
         url:'www.baidu.com'
