@@ -524,6 +524,7 @@ export default class Calendar extends React.Component{
                         this.closeAll();
                         this.setState({
                             showCalendar:!showCalendar,
+                            selectTime:false,
                         });
                     }}
                 >
