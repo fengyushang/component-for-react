@@ -1,0 +1,89 @@
+const PARAMS = [{
+    pNode:{label:'商品信息'},
+    cNode:[{
+        label:'商品列表',
+        url:'www.baidu.com'
+    },{
+        label:'基础配置',
+        url:'www.baidu.com'
+    },{
+        label:'板块设置',
+        url:'www.baidu.com'
+    },{
+        label:'策略设置',
+        url:'www.baidu.com'
+    },{
+        label:'服务器配置',
+        url:'www.baidu.com'
+    }]
+},{
+    pNode:{label:'用户信息'},
+    cNode:[{
+        label:'用户列表',
+        url:'www.baidu.com'
+    },{
+        label:'等级设置',
+        url:'www.baidu.com'
+    },{
+        label:'实名审核',
+        url:'www.baidu.com'
+    }]
+},{
+    pNode:{label:'资金信息'},
+    cNode:[{
+        label:'充值管理',
+        url:'www.baidu.com'
+    },{
+        label:'提现管理',
+        url:'www.baidu.com'
+    },{
+        label:'划转记录',
+        url:'www.baidu.com'
+    },{
+        label:'流水管理',
+        url:'www.baidu.com'
+    },{
+        label:'人工存取',
+        url:'www.baidu.com'
+    }]
+},{
+    pNode:{label:'订单信息'},
+    cNode:[{
+        label:'现货订单',
+        url:'www.baidu.com'
+    },{
+        label:'期货订单',
+        url:'www.baidu.com'
+    },{
+        label:'掉期订单',
+        url:'www.baidu.com'
+    }]
+},{
+    pNode:{label:'风控信息'},
+    cNode:[{
+        label:'订单风控',
+        url:'www.baidu.com'
+    }]
+},{
+    pNode:{label:'运营信息'},
+    cNode:[{
+        label:'资讯管理',
+        url:'www.baidu.com'
+    },{
+        label:'帮助文档',
+        url:'www.baidu.com'
+    },{
+        label:'运营公告',
+        url:'www.baidu.com'
+    }]
+},{
+    pNode:{label:'系统配置'},
+    cNode:[{
+        label:'系统设置',
+        url:'www.baidu.com'
+    },{
+        label:'账号管理',
+        url:'www.baidu.com'
+    }]
+}];
+export default PARAMS;
