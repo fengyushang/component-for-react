@@ -225,7 +225,8 @@ export default class RightContent extends React.Component {
                         options: [
                             {label: '三级头', value: 0, disabled: true},
                             {label: '三级甲', value: 1},
-                            {label: 'Kar98k', value: 2},
+                            {label:'三级包',value:2},
+                            {label: 'Kar98k', value: 3},
                         ]
                     }}
                 />
@@ -236,8 +237,9 @@ export default class RightContent extends React.Component {
                     config={{
                         options:[
                             {label:'三级头',value:0,disabled:true},
-                            {label:'三级包',value:1},
-                            {label:'Kar98k',value:2},
+                            {label:'三级甲',value:1},
+                            {label:'三级包',value:2},
+                            {label:'Kar98k',value:3},
                         ]
                     }}
                     />`}/>
