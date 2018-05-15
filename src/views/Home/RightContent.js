@@ -6,6 +6,7 @@ import Select, {InputSelect} from 'components/Select';
 import Tipsy from 'components/Tipsy';
 import Pre from 'components/Pre';
 import {autobind} from 'core-decorators';
+import Radio from 'components/Radio';
 import './style.less';
 
 @autobind
@@ -16,15 +17,16 @@ export default class RightContent extends React.Component {
         pageSize: 20,
         current: 1,
         demo: '1',
-        demo2: '1'
+        demo2: '1',
+        radio:''
 
-    }
+    };
     change(name, value) {
         this.setState({[name]: value});
     }
 
     render() {
-        const {input1, total, pageSize, current, demo, demo2} = this.state;
+        const {input1, total, pageSize, current, demo, demo2,radio} = this.state;
         return <div className='home-page'>
             <Panel title='按钮' className='rightContent'>
                 <Button label="确定" sureBtn/>
@@ -213,6 +215,34 @@ export default class RightContent extends React.Component {
                         <div>3</div>
                     </Col>
                 </Row>`}/>
+            </Panel>
+            <Panel title='Radio单选按钮'>
+                <Radio
+                    name='radio'
+                    value={radio}
+                    onChange={this.change}
+                    config={{
+                        options: [
+                            {label: '三级头', value: 0, disabled: true},
+                            {label: '三级甲', value: 1},
+                            {label:'三级包',value:2},
+                            {label: 'Kar98k', value: 3},
+                        ]
+                    }}
+                />
+                <Pre code={`<Radio
+                    name='radio'
+                    value={radio}
+                    onChange={this.change}
+                    config={{
+                        options:[
+                            {label:'三级头',value:0,disabled:true},
+                            {label:'三级甲',value:1},
+                            {label:'三级包',value:2},
+                            {label:'Kar98k',value:3},
+                        ]
+                    }}
+                    />`}/>
             </Panel>
         </div>
     }
