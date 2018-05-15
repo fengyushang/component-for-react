@@ -19,6 +19,13 @@
         width:@sideBarWidth;
         border-right: 1px solid #ddd;
         background: #fff;
+        .parentNode{
+            transition: background .3s .3s ease-in;
+            &:hover{
+                background: linear-gradient(to left, #1d84b1, #00195c);
+                color:#fff;
+            }
+        }
         li{
             line-height: 50px;
             text-align: center;
@@ -27,14 +34,23 @@
                 .parentNode{
                     background: linear-gradient(to left, #1d84b1, #00195c);
                     color:#fff;
+                    -webkit-transition: background .3s .3s ease-in;
+                }
+                ul{
+                    display: block;
                 }
             }
             ul{
                 font-size: 12px;
                 background: #f5f5f5;
+                display: none;
             }
             li{
                 cursor: pointer;
+                &:hover{
+                    color:#00195c;
+                    font-weight: bold;                   
+                }
             }
             .hover{
                 color:#00195c;
