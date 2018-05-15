@@ -233,11 +233,11 @@ export default class Calendar extends React.Component{
 
         if(item.class.indexOf('currentMonth')!=-1){
             function selectIndex(){
-                if(select1.index==index){
+                if(select1.select==select2.select&&select1.index==index){
                     select1.select=-1;
                     select1.index=-1;
                     select1.text='';
-                }else if(select2.index==index){
+                }else if(select1.select==select2.select&&select2.index==index){
                     select2.select=-1;
                     select2.index=-1;
                     select2.text='';
@@ -261,18 +261,20 @@ export default class Calendar extends React.Component{
             function getDay(){
                 let dayArr=[];
 
-                function sortDay(){
+                function sortDay(reverse){
                     if(year1==year2&&month1==month2){
                         dayArr[0]=+select1.text<+select2.text?select1.text:select2.text;
                         dayArr[1]=+select1.text>+select2.text?select1.text:select2.text;
                     }else{
-                        dayArr[0]=select1.text;
-                        dayArr[1]=select2.text;
+                        dayArr[!reverse?0:1]=select1.text;
+                        dayArr[!reverse?1:0]=select2.text;
                     }
                 };
 
-                if(select1.select==1&&select2.select==2||select1.select==2&&select2.select==1){
+                if(select1.select==1&&select2.select==2){
                     sortDay();
+                }else if(select1.select==2&&select2.select==1){
+                    sortDay(true);
                 }else{
                     if(select1.select==1&&select2.select==1){
                         This.setState({
@@ -599,6 +601,16 @@ export default class Calendar extends React.Component{
                                     this.setState({
                                         startTime:'',
                                         endTime:'',
+                                        select1:{
+                                            select:-1,
+                                            index:-1,
+                                            text:'',
+                                        },
+                                        select2:{
+                                            select:-1,
+                                            index:-1,
+                                            text:'',
+                                        },
                                     });
                                 }}
                             >
