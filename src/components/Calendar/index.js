@@ -682,7 +682,7 @@ export default class Calendar extends React.Component{
                                         startTime:outputDate.startDate,
                                         endTime:outputDate.endDate,
                                     });
-                                    update&&update(outputDate);
+                                    update&&update(!this.props.single?outputDate:outputDate.startDate);
                                 }}
                             >
                                 确定
