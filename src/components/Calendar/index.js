@@ -67,7 +67,6 @@ export default class Calendar extends React.Component{
                 index:-1,
                 text:'',
             },
-            acrossMonth:false,
             selectTime:false,
             startTime:'',
             endTime:'',
@@ -111,6 +110,7 @@ export default class Calendar extends React.Component{
     closeAll(){
         for(let value of CalendarArr){
             value.setState({
+                selectTime:false,
                 showCalendar:false,
             });
         }
@@ -483,7 +483,7 @@ export default class Calendar extends React.Component{
     }
 
     render(){
-        const {year1,month1,day1,week1,hours1,minutes1,seconds1,year2,month2,day2,week2,hours2,minutes2,seconds2,dayArr1,dayArr2,select1,select2,acrossMonth,timeJson,selectTime,startTime,endTime,showCalendar}=this.state;
+        const {year1,month1,day1,week1,hours1,minutes1,seconds1,year2,month2,day2,week2,hours2,minutes2,seconds2,dayArr1,dayArr2,select1,select2,timeJson,selectTime,startTime,endTime,showCalendar}=this.state;
         const {format,startText,endText,startDate,endDate,update}=this.props;
 
         return(
@@ -643,11 +643,63 @@ const YearSelect=(props)=>{
 
     return(
         <div className={'yearSelect '+className}>
-            <i onClick={(ev)=>{parent.changeYear(select,-1)}} className={'iconfont icon-Group1'+(select==2&&state.year1==state.year2?' disabled':'')}></i>
-            <i onClick={(ev)=>{parent.changeMonth(select,-1)}} className={'iconfont icon-xingzhuang3'+(select==2&&state.month1==state.month2?' disabled':'')}></i>
+            <i
+                onClick={(ev)=>{parent.changeYear(select,-1)}}
+                className={(function(){
+                    let className='iconfont icon-Group1 ';
+
+                    if(select==2){
+                        if(state.month2>=state.month1&&state.year2==state.year1||state.month2<state.month1&&state.year2-1==state.year1){
+                            className+='disabled';
+                        }
+                    }
+
+                    return className;
+                }())}
+            ></i>
+            <i
+                onClick={(ev)=>{parent.changeMonth(select,-1)}}
+                className={(function(){
+                    let className='iconfont icon-xingzhuang3 ';
+
+                    if(select==2){
+                        if(state.year2==state.year1&&state.month2==state.month1){
+                            className+='disabled';
+                        }
+                    }
+
+                    return className;
+                }())}
+            ></i>
             <span>{state['year'+select]}年{toTwo(state['month'+select])}月</span>
-            <i onClick={(ev)=>{parent.changeMonth(select,1)}} className={'iconfont icon-xingzhuang2'+(select==1&&state.month1==state.month2?' disabled':'')}></i>
-            <i onClick={(ev)=>{parent.changeYear(select,1)}} className={'iconfont icon-Groupwqe'+(select==1&&state.year1==state.year2?' disabled':'')}></i>
+            <i
+                onClick={(ev)=>{parent.changeMonth(select,1)}}
+                className={(function(){
+                    let className='iconfont icon-xingzhuang2 ';
+
+                    if(select==1){
+                        if(state.year1==state.year2&&state.month1==state.month2){
+                            className+='disabled';
+                        }
+                    }
+
+                    return className;
+                }())}
+            ></i>
+            <i
+                onClick={(ev)=>{parent.changeYear(select,1)}}
+                className={(function(){
+                    let className='iconfont icon-Groupwqe ';
+
+                    if(select==1){
+                        if(state.month1<=state.month2&&state.year1==state.year2||state.month1>state.month2&&state.year1+1==state.year2){
+                            className+='disabled';
+                        }
+                    }
+
+                    return className;
+                }())}
+            ></i>
         </div>
     );
 };
