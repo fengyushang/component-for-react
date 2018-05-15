@@ -20,11 +20,12 @@ export default class TestYyd extends React.Component{
         return(
             <div className="TestYyd">
                 <Calendar
+                    single={true}
                     update={(date)=>{
                         console.log(date);
                     }}
                 />
-
+                <br/>
                 <Calendar
                     update={(date)=>{
                         console.log(date);

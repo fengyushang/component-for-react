@@ -258,4 +258,39 @@
             }
         }
     }
+    &.single{
+        width: 200px;
+        .CalendarSelect .CalendarPick > span{
+            width: 100%;
+            padding: 0;
+        }
+        .CalendarOption{
+            width: 300px;
+            .CalendarTitle > span{
+                width: 100%;
+            }
+            .CalendarMain{
+                .daySelectWrap .daySelect{
+                    width: 100%;
+                }
+                .timeSelectWrap{
+                    .timeSelectTitle{
+                        display: none;
+                    }
+                    .timeSelectMain .timeSelect{
+                        width: 100%;
+                    }
+                    .timeSelect .timeMain > ul{
+                        height: 230px;
+                        li:last-of-type{
+                            margin-bottom: 190px;
+                        }
+                    }
+                }
+            }
+            .CalendarEnd .buttonWrap button{
+                width: 80px;
+            }
+        }
+    }
 }

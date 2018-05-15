@@ -8,6 +8,7 @@ import './style.less';
 @autobind
 export default class Calendar extends React.Component{
     static propTypes={
+        single:PropTypes.bool,
         format:PropTypes.string,
         startText:PropTypes.string,
         endText:PropTypes.string,
@@ -17,6 +18,7 @@ export default class Calendar extends React.Component{
     }
 
     static defaultProps={
+        single:false,//是否是单个日期选择
         format:'yyyy-MM-dd hh:mm:ss',//输出日期格式化
         startText:'选择开始时间',//默认开始文字
         endText:'选择结束时间',//默认结束文字
@@ -156,7 +158,7 @@ export default class Calendar extends React.Component{
         });
     }
 
-    createDay(index,year=this.date.year,month=this.date.month){
+    createDay(select,year=this.date.year,month=this.date.month){
         let {dayArr1}=this.state;
         let length=42;
         let weekArr=['一','二','三','四','五','六','日'];
@@ -195,7 +197,7 @@ export default class Calendar extends React.Component{
         }
 
         this.setState({
-            ['dayArr'+index]:[].concat(weekArr,lastMonth,currentMonth,nextMonth),
+            ['dayArr'+select]:[].concat(weekArr,lastMonth,currentMonth,nextMonth),
             select1:{
                 select:-1,
                 index:-1,
@@ -232,81 +234,98 @@ export default class Calendar extends React.Component{
         let {dayArr1,dayArr2,select1,select2,year1,year2,month1,month2,day1,day2}=this.state;
 
         if(item.class.indexOf('currentMonth')!=-1){
-            function selectIndex(){
-                if(select1.select==select2.select&&select1.index==index){
-                    select1.select=-1;
-                    select1.index=-1;
-                    select1.text='';
-                }else if(select1.select==select2.select&&select2.index==index){
-                    select2.select=-1;
-                    select2.index=-1;
-                    select2.text='';
-                }else{
-                    if(select1.index==-1){
-                        select1.select=select;
-                        select1.index=index;
-                        select1.text=item.text;
+            if(!this.props.single){
+                function selectIndex(){
+                    if(select1.select==select2.select&&select1.index==index){
+                        select1.select=-1;
+                        select1.index=-1;
+                        select1.text='';
+                    }else if(select1.select==select2.select&&select2.index==index){
+                        select2.select=-1;
+                        select2.index=-1;
+                        select2.text='';
                     }else{
-                        select2.select=select;
-                        select2.index=index;
-                        select2.text=item.text;
-                    }
-                }
-            };
-
-            if(dayArr1[index].class.indexOf('currentMonth')!=-1||dayArr2[index].class.indexOf('currentMonth')!=-1){
-                selectIndex();
-            }
-
-            function getDay(){
-                let dayArr=[];
-
-                function sortDay(reverse){
-                    if(year1==year2&&month1==month2){
-                        dayArr[0]=+select1.text<+select2.text?select1.text:select2.text;
-                        dayArr[1]=+select1.text>+select2.text?select1.text:select2.text;
-                    }else{
-                        dayArr[!reverse?0:1]=select1.text;
-                        dayArr[!reverse?1:0]=select2.text;
+                        if(select1.index==-1){
+                            select1.select=select;
+                            select1.index=index;
+                            select1.text=item.text;
+                        }else{
+                            select2.select=select;
+                            select2.index=index;
+                            select2.text=item.text;
+                        }
                     }
                 };
 
-                if(select1.select==1&&select2.select==2){
-                    sortDay();
-                }else if(select1.select==2&&select2.select==1){
-                    sortDay(true);
-                }else{
-                    if(select1.select==1&&select2.select==1){
-                        This.setState({
-                            month2:month1,
-                        });
-                    }else if(select1.select==2&&select2.select==2){
-                        This.setState({
-                            month1:month2,
-                        });
-                    }
-
-                    if(select1.index!=-1&&select2.index==-1){
-                        dayArr[0]=select1.text;
-                    }else if(select2.index!=-1&&select1.index==-1){
-                        dayArr[0]=select2.text;
-                    }else if(select1.index!=-1&&select2.index!=-1){
-                        sortDay();
-                    }
+                if(dayArr1[index].class.indexOf('currentMonth')!=-1||dayArr2[index].class.indexOf('currentMonth')!=-1){
+                    selectIndex();
                 }
 
-                dayArr[0]=dayArr[0]||day1;
-                dayArr[1]=dayArr[1]||day2;
+                function getDay(){
+                    let dayArr=[];
 
-                return dayArr;
-            };
+                    function sortDay(reverse){
+                        if(year1==year2&&month1==month2){
+                            dayArr[0]=+select1.text<+select2.text?select1.text:select2.text;
+                            dayArr[1]=+select1.text>+select2.text?select1.text:select2.text;
+                        }else{
+                            dayArr[!reverse?0:1]=select1.text;
+                            dayArr[!reverse?1:0]=select2.text;
+                        }
+                    };
 
-            this.setState({
-                select1,
-                select2,
-                day1:getDay()[0],
-                day2:getDay()[1],
-            });
+                    if(select1.select==1&&select2.select==2){
+                        sortDay();
+                    }else if(select1.select==2&&select2.select==1){
+                        sortDay(true);
+                    }else{
+                        if(select1.select==1&&select2.select==1){
+                            This.setState({
+                                month2:month1,
+                            });
+                        }else if(select1.select==2&&select2.select==2){
+                            This.setState({
+                                month1:month2,
+                            });
+                        }
+
+                        if(select1.index!=-1&&select2.index==-1){
+                            dayArr[0]=select1.text;
+                        }else if(select2.index!=-1&&select1.index==-1){
+                            dayArr[0]=select2.text;
+                        }else if(select1.index!=-1&&select2.index!=-1){
+                            sortDay();
+                        }
+                    }
+
+                    dayArr[0]=dayArr[0]||day1;
+                    dayArr[1]=dayArr[1]||day2;
+
+                    return dayArr;
+                };
+
+                this.setState({
+                    select1,
+                    select2,
+                    day1:getDay()[0],
+                    day2:getDay()[1],
+                });
+            }else{
+                if(select1.index==index){
+                    select1.select=-1;
+                    select1.index=-1;
+                    select1.text='';
+                }else{
+                    select1.select=1;
+                    select1.index=index;
+                    select1.text=item.text;
+                }
+
+                this.setState({
+                    select1,
+                    day1:item.text,
+                });
+            }
         }
     }
 
@@ -341,17 +360,20 @@ export default class Calendar extends React.Component{
         return className;
     }
 
-    changeMonth(index,num){
+    changeMonth(select,num){
         let {year1,year2,month1,month2}=this.state;
 
-        if(index==1){
+        if(select==1){
             month1=month1+num;
             if(month1<1)month1=12;
             if(month1>12)month1=1;
-            if(year1==year2&&month1>month2){
-                month1=month2;
+
+            if(!this.props.single){
+                if(year1==year2&&month1>month2){
+                    month1=month2;
+                }
             }
-        }else if(index==2){
+        }else if(select==2){
             month2=month2+num;
             if(month2<1)month2=12;
             if(month2>12)month2=1;
@@ -366,21 +388,24 @@ export default class Calendar extends React.Component{
         });
 
         setTimeout(()=>{
-            this.createDay(index,this.state['year'+index],this.state['month'+index]);
+            this.createDay(select,this.state['year'+select],this.state['month'+select]);
         });
     }
 
-    changeYear(index,num){
+    changeYear(select,num){
         let {year1,year2,month1,month2}=this.state;
 
-        if(index==1){
+        if(select==1){
             year1=year1+num;
-            if(year1==year2&&month1>month2){
-                year1=year2-1;
-            }else if(year1>year2){
-                year1=year2;
+
+            if(!this.props.single){
+                if(year1==year2&&month1>month2){
+                    year1=year2-1;
+                }else if(year1>year2){
+                    year1=year2;
+                }
             }
-        }else if(index==2){
+        }else if(select==2){
             year2=year2+num;
             if(year2==year1&&month2<month1){
                 year2=year1+1;
@@ -395,7 +420,7 @@ export default class Calendar extends React.Component{
         });
 
         setTimeout(()=>{
-            this.createDay(index,this.state['year'+index],this.state['month'+index]);
+            this.createDay(select,this.state['year'+select],this.state['month'+select]);
         });
     }
 
@@ -404,16 +429,19 @@ export default class Calendar extends React.Component{
             Scroll(this.hoursWrap1,'top',this.hoursWrap1.getElementsByClassName('active')[0].offsetTop);
             Scroll(this.minutesWrap1,'top',this.minutesWrap1.getElementsByClassName('active')[0].offsetTop);
             Scroll(this.secondsWrap1,'top',this.secondsWrap1.getElementsByClassName('active')[0].offsetTop);
-            Scroll(this.hoursWrap2,'top',this.hoursWrap2.getElementsByClassName('active')[0].offsetTop);
-            Scroll(this.minutesWrap2,'top',this.minutesWrap2.getElementsByClassName('active')[0].offsetTop);
-            Scroll(this.secondsWrap2,'top',this.secondsWrap2.getElementsByClassName('active')[0].offsetTop);
+
+            if(!this.props.single){
+                Scroll(this.hoursWrap2,'top',this.hoursWrap2.getElementsByClassName('active')[0].offsetTop);
+                Scroll(this.minutesWrap2,'top',this.minutesWrap2.getElementsByClassName('active')[0].offsetTop);
+                Scroll(this.secondsWrap2,'top',this.secondsWrap2.getElementsByClassName('active')[0].offsetTop);
+            }
         });
     }
 
     setTime(key,value){
         let {year1,month1,day1,hours1,minutes1,seconds1,year2,month2,day2,hours2,minutes2,seconds2}=this.state;
 
-        if(year1==year2&&month1==month2&&day1==day2){
+        if(!this.props.single&&year1==year2&&month1==month2&&day1==day2){
             switch(key){
                 case 'hours1':
                         if(value>=hours2){
@@ -486,10 +514,10 @@ export default class Calendar extends React.Component{
 
     render(){
         const {year1,month1,day1,week1,hours1,minutes1,seconds1,year2,month2,day2,week2,hours2,minutes2,seconds2,dayArr1,dayArr2,select1,select2,timeJson,selectTime,startTime,endTime,showCalendar}=this.state;
-        const {format,startText,endText,startDate,endDate,update}=this.props;
+        const {single,format,startText,endText,startDate,endDate,update}=this.props;
 
         return(
-            <div className="Calendar">
+            <div className={'Calendar'+(single?' single':'')}>
                 <div
                     className="CalendarSelect"
                     onClick={(ev)=>{
@@ -502,16 +530,28 @@ export default class Calendar extends React.Component{
                     <i className="iconfont icon-icon1"></i>
                     <div className="CalendarPick">
                         <span>{(startTime||startDate)&&dateFormat0(startTime||startDate,format)||startText}</span>
-                        <i className="iconfont icon-xingzhuang4"></i>
-                        <span>{(endTime||endDate)&&dateFormat0(endTime||endDate,format)||endText}</span>
+                        {
+                            !single&&
+                            <i className="iconfont icon-xingzhuang4"></i>
+                        }
+                        {
+                            !single&&
+                            <span>{(endTime||endDate)&&dateFormat0(endTime||endDate,format)||endText}</span>
+                        }
                     </div>
                 </div>
 
                 <div className={'CalendarOption'+(showCalendar?' active':'')}>
                     <div className="CalendarTitle">
                         <span>{year1}-{toTwo(month1)}-{toTwo(day1)} {toTwo(hours1)}:{toTwo(minutes1)}:{toTwo(seconds1)}</span>
-                        <i className="iconfont icon-xingzhuang4"></i>
-                        <span>{year2}-{toTwo(month2)}-{toTwo(day2)} {toTwo(hours2)}:{toTwo(minutes2)}:{toTwo(seconds2)}</span>
+                        {
+                            !single&&
+                            <i className="iconfont icon-xingzhuang4"></i>
+                        }
+                        {
+                            !single&&
+                            <span>{year2}-{toTwo(month2)}-{toTwo(day2)} {toTwo(hours2)}:{toTwo(minutes2)}:{toTwo(seconds2)}</span>
+                        }
                     </div>
 
                     <div className="CalendarMain">
@@ -522,11 +562,14 @@ export default class Calendar extends React.Component{
                                 className="yearSelectLeft"
                             />
 
-                            <YearSelect
-                                parent={this}
-                                select="2"
-                                className="yearSelectRight"
-                            />
+                            {
+                                !single&&
+                                <YearSelect
+                                    parent={this}
+                                    select="2"
+                                    className="yearSelectRight"
+                                />
+                            }
                         </div>
 
                         <div className="daySelectWrap">
@@ -536,11 +579,14 @@ export default class Calendar extends React.Component{
                                 className="daySelectLeft"
                             />
 
-                            <DaySelect
-                                parent={this}
-                                select="2"
-                                className="daySelectRight"
-                            />
+                            {
+                                !single&&
+                                <DaySelect
+                                    parent={this}
+                                    select="2"
+                                    className="daySelectRight"
+                                />
+                            }
                         </div>
 
                         <div className={'timeSelectWrap'+(selectTime?' active':'')}>
@@ -556,11 +602,14 @@ export default class Calendar extends React.Component{
                                     className="timeSelectLeft"
                                 />
 
-                                <TimeSelect
-                                    parent={this}
-                                    select="2"
-                                    className="timeSelectRight"
-                                />
+                                {
+                                    !single&&
+                                    <TimeSelect
+                                        parent={this}
+                                        select="2"
+                                        className="timeSelectRight"
+                                    />
+                                }
                             </div>
                         </div>
                     </div>
@@ -599,6 +648,7 @@ export default class Calendar extends React.Component{
                                 type="button"
                                 onClick={(ev)=>{
                                     this.setState({
+                                        selectTime:false,
                                         startTime:'',
                                         endTime:'',
                                         select1:{
@@ -689,7 +739,7 @@ const YearSelect=(props)=>{
                 className={(function(){
                     let className='iconfont icon-xingzhuang2 ';
 
-                    if(select==1){
+                    if(!parent.props.single&&select==1){
                         if(state.year1==state.year2&&state.month1==state.month2){
                             className+='disabled';
                         }
@@ -703,7 +753,7 @@ const YearSelect=(props)=>{
                 className={(function(){
                     let className='iconfont icon-Groupwqe ';
 
-                    if(select==1){
+                    if(!parent.props.single&&select==1){
                         if(state.month1<=state.month2&&state.year1==state.year2||state.month1>state.month2&&state.year1+1==state.year2){
                             className+='disabled';
                         }
