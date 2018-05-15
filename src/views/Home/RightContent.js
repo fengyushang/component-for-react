@@ -7,6 +7,7 @@ import Tipsy from 'components/Tipsy';
 import Pre from 'components/Pre';
 import {autobind} from 'core-decorators';
 import Radio from 'components/Radio';
+import Calendar from 'components/Calendar';
 import './style.less';
 
 @autobind
@@ -78,8 +79,8 @@ export default class RightContent extends React.Component {
     name="demo"
     value={demo}
     onChange={this.change}
-    placeholder='请输入选项'     
-    readOnly={true}                   
+    placeholder='请输入选项'
+    readOnly={true}
     config={{
         options: [{
             label: '选项A',
@@ -243,6 +244,37 @@ export default class RightContent extends React.Component {
                         ]
                     }}
                     />`}/>
+            </Panel>
+            <Panel title='日历组件'>
+                <div>单身狗模式（o(╥﹏╥)o）</div>
+                <Calendar
+                    single={true}
+                    update={(date)=>{
+                        console.log(date);
+                    }}
+                />
+                <Pre code={
+                    `<Calendar
+                        single={true}
+                        update={(date)=>{
+                            console.log(date);
+                        }}
+                    />`
+                }/>
+                <br/>
+                <div>情侣模式（默认开启）</div>
+                <Calendar
+                    update={(date)=>{
+                        console.log(date);
+                    }}
+                />
+                <Pre code={
+                    `<Calendar
+                        update={(date)=>{
+                            console.log(date);
+                        }}
+                    />`
+                }/>
             </Panel>
         </div>
     }
