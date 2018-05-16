@@ -18,3 +18,5 @@
 | value | 值 | string | - | 是 |
 | onChange | 点击选择时的回调，参数是name和value | Function(name, value) | - | 是 |
 | options | 内部：label(名称),value(值),disabled(不可点击状态) | array | '' | 是 |
+| allCheck | 全选按钮是否存在 | bool | false | 否 |
+
