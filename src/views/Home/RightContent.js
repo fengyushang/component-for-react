@@ -8,6 +8,7 @@ import Pre from 'components/Pre';
 import {autobind} from 'core-decorators';
 import Radio from 'components/Radio';
 import CheckBox from 'components/CheckBox';
+import Calendar from 'components/Calendar';
 import './style.less';
 
 @autobind
@@ -24,55 +25,14 @@ export default class RightContent extends React.Component {
         checked1:[],
         rowCheck:false,
         allCheckStatus:false,
-        checkArr:[
-            {label:"英雄联盟",value:"1",disabled:false},
-            {label:"王者荣耀",value:"2",disabled:false},
-            {label:"刺激战场",value:"3",disabled:false}
-        ]
     };
     change(name, value) {
         this.setState({[name]: value});
     }
 
-    kickOutArr(val,arr){
-        let beauty = [];
-        let res =  arr.filter(function(i){
-            return beauty.indexOf(i) <0 && beauty.push(i) && i!=val;
-        });
-        return res;
-    }
-
-    allcheck(name,value){
-        const { checkArr } = this.state;
-        if(value){
-            let arr = [];
-            for (let i = 0;i<checkArr.length;i++){
-                arr.push(checkArr[i].value);
-            }
-            this.setState({checked:arr});
-        }else{
-            this.setState({checked:[]})
-        }
-        this.setState({allCheckStatus:value,rowCheck:false});
-    }
-
-    checkChange(name,value,options){
-        const { checked } = this.state;
-        let newValue = Object.assign({},{val:checked}).val;
-        newValue.indexOf(value) >=0 ? newValue = this.kickOutArr(value,newValue) : newValue.push(value);
-        this.setState({checked:newValue},()=>{
-            if(this.state.checked.length == options.length){
-                this.setState({allCheckStatus:true,rowCheck:false})
-            }else if (this.state.checked.length == '0'){
-                this.setState({allCheckStatus:false,rowCheck:false})
-            }else{
-                this.setState({allCheckStatus:false,rowCheck:true})
-            }
-        });
-    }
 
     render() {
-        const {input1, total, pageSize, current, demo, demo2,radio,checked,allCheckStatus,checkArr,rowCheck,checked1} = this.state;
+        const {input1, total, pageSize, current, demo, demo2,radio} = this.state;
         return <div className='home-page'>
             <Panel title='按钮' className='rightContent'>
                 <Button label="确定" sureBtn/>
@@ -124,8 +84,8 @@ export default class RightContent extends React.Component {
     name="demo"
     value={demo}
     onChange={this.change}
-    placeholder='请输入选项'     
-    readOnly={true}                   
+    placeholder='请输入选项'
+    readOnly={true}
     config={{
         options: [{
             label: '选项A',
@@ -334,6 +294,37 @@ export default class RightContent extends React.Component {
                 `}/>
             </Panel>
 
+            <Panel title='日历组件'>
+                <div>单身狗模式（o(╥﹏╥)o）</div>
+                <Calendar
+                    single={true}
+                    update={(date)=>{
+                        console.log(date);
+                    }}
+                />
+                <Pre code={
+                    `<Calendar
+                        single={true}
+                        update={(date)=>{
+                            console.log(date);
+                        }}
+                    />`
+                }/>
+                <br/>
+                <div>情侣模式（默认开启）</div>
+                <Calendar
+                    update={(date)=>{
+                        console.log(date);
+                    }}
+                />
+                <Pre code={
+                    `<Calendar
+                        update={(date)=>{
+                            console.log(date);
+                        }}
+                    />`
+                }/>
+            </Panel>
         </div>
     }
 }
