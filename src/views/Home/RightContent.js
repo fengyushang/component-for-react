@@ -7,6 +7,7 @@ import Tipsy from 'components/Tipsy';
 import Pre from 'components/Pre';
 import {autobind} from 'core-decorators';
 import Radio from 'components/Radio';
+import CheckBox from 'components/CheckBox';
 import './style.less';
 
 @autobind
@@ -18,15 +19,60 @@ export default class RightContent extends React.Component {
         current: 1,
         demo: '1',
         demo2: '1',
-        radio:''
-
+        radio:'',
+        checked:[],
+        checked1:[],
+        rowCheck:false,
+        allCheckStatus:false,
+        checkArr:[
+            {label:"英雄联盟",value:"1",disabled:false},
+            {label:"王者荣耀",value:"2",disabled:false},
+            {label:"刺激战场",value:"3",disabled:false}
+        ]
     };
     change(name, value) {
         this.setState({[name]: value});
     }
 
+    kickOutArr(val,arr){
+        let beauty = [];
+        let res =  arr.filter(function(i){
+            return beauty.indexOf(i) <0 && beauty.push(i) && i!=val;
+        });
+        return res;
+    }
+
+    allcheck(name,value){
+        const { checkArr } = this.state;
+        if(value){
+            let arr = [];
+            for (let i = 0;i<checkArr.length;i++){
+                arr.push(checkArr[i].value);
+            }
+            this.setState({checked:arr});
+        }else{
+            this.setState({checked:[]})
+        }
+        this.setState({allCheckStatus:value,rowCheck:false});
+    }
+
+    checkChange(name,value,options){
+        const { checked } = this.state;
+        let newValue = Object.assign({},{val:checked}).val;
+        newValue.indexOf(value) >=0 ? newValue = this.kickOutArr(value,newValue) : newValue.push(value);
+        this.setState({checked:newValue},()=>{
+            if(this.state.checked.length == options.length){
+                this.setState({allCheckStatus:true,rowCheck:false})
+            }else if (this.state.checked.length == '0'){
+                this.setState({allCheckStatus:false,rowCheck:false})
+            }else{
+                this.setState({allCheckStatus:false,rowCheck:true})
+            }
+        });
+    }
+
     render() {
-        const {input1, total, pageSize, current, demo, demo2,radio} = this.state;
+        const {input1, total, pageSize, current, demo, demo2,radio,checked,allCheckStatus,checkArr,rowCheck,checked1} = this.state;
         return <div className='home-page'>
             <Panel title='按钮' className='rightContent'>
                 <Button label="确定" sureBtn/>
@@ -244,6 +290,50 @@ export default class RightContent extends React.Component {
                     }}
                     />`}/>
             </Panel>
+            <Panel title='CheckBox多选框'>
+                <CheckBox
+                    options={[
+                        {label:"LCK",value:"0",disabled:true},
+                        {label:"LPL",value:"1",disabled:false},
+                    ]}
+                    name='team'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                />
+                <Pre code={`
+                    <CheckBox
+                    options={[
+                        {label:"英雄联盟",value:"0",disabled:true},
+                        {label:"王者荣耀",value:"1",disabled:false},
+                    ]}
+                    name='team'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                />
+                />
+                `}/>
+                <CheckBox
+                    options={[
+                        {label:"英雄联盟",value:"0",disabled:false},
+                        {label:"王者荣耀",value:"1",disabled:false},
+                        {label:"绝地求生",value:"2",disabled:false}
+                    ]}
+                    name='checkbox'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                    allCheck
+                />
+                <Pre code={`
+                    <CheckBox
+                    options={[
+                        {label:"英雄联盟",value:"0",disabled:false},
+                        {label:"王者荣耀",value:"1",disabled:false},
+                        {label:"刺激战场",value:"2",disabled:false}
+                    ]}
+                    name='checkbox'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                    allCheck
+                />
+                `}/>
+            </Panel>
+
         </div>
     }
 }

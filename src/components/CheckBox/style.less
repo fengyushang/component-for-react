@@ -1,0 +1,40 @@
+@import "../style/color";
+.check-box {
+  .h-checkbox {
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+    i{
+      margin-right: 3px;
+      font-size: 14px;
+      &.icon-hebingxingzhuang,&.icon-CombinedShape{
+        color: @input-edit-border;
+      }
+      &.icon-Rectangle1{
+        color: @pagination-border-color-default;
+      }
+    }
+    &:hover{
+      i{
+        color: @input-edit-border;
+      }
+    }
+    &.all-check {
+      display: block;
+      margin-bottom: 10px;
+    }
+    &.disabled{
+      cursor: not-allowed;
+      i{
+        border: 1px solid @pagination-border-color-default;
+        border-radius: 3px;
+        background: @radio-color;
+        color: @radio-color;
+        font-size: 13px;
+      }
+      .checkbox-label{
+        color: @radio-disabled-text;
+      }
+    }
+  }
+}
