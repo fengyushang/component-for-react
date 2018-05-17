@@ -1348,7 +1348,7 @@ function tweenMove(time,obj,json,type,endFn){
 				clearInterval(obj.timer);
 				endFn&&endFn.call(obj);
 			}
-		},20);
+		},1000/60);
 	}
 };
 
@@ -3076,4 +3076,7 @@ export{
 		Scroll,
 		cBub,
 		pDef,
+		tweenMove,
+		css,
+
 	};
