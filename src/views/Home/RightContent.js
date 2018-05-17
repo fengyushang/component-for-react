@@ -7,6 +7,7 @@ import Tipsy from 'components/Tipsy';
 import Pre from 'components/Pre';
 import {autobind} from 'core-decorators';
 import Radio from 'components/Radio';
+import CheckBox from 'components/CheckBox';
 import Calendar from 'components/Calendar';
 import Alert from 'components/Alert';
 import Confirm from 'components/Confirm';
@@ -23,14 +24,20 @@ export default class RightContent extends React.Component {
         demo: '1',
         demo2: '1',
         radio:'',
+
         show1:false,
         show2:false,
         show3:false,
 
+        checked:[],
+        checked1:[],
+        rowCheck:false,
+        allCheckStatus:false,
     };
     change(name, value) {
         this.setState({[name]: value});
     }
+
 
     render() {
         const {input1, total, pageSize, current, demo, demo2,radio,show1,show2,show3} = this.state;
@@ -251,6 +258,50 @@ export default class RightContent extends React.Component {
                     }}
                     />`}/>
             </Panel>
+            <Panel title='CheckBox多选框'>
+                <CheckBox
+                    options={[
+                        {label:"LCK",value:"0",disabled:true},
+                        {label:"LPL",value:"1",disabled:false},
+                    ]}
+                    name='team'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                />
+                <Pre code={`
+                    <CheckBox
+                    options={[
+                        {label:"英雄联盟",value:"0",disabled:true},
+                        {label:"王者荣耀",value:"1",disabled:false},
+                    ]}
+                    name='team'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                />
+                />
+                `}/>
+                <CheckBox
+                    options={[
+                        {label:"英雄联盟",value:"0",disabled:false},
+                        {label:"王者荣耀",value:"1",disabled:false},
+                        {label:"绝地求生",value:"2",disabled:false}
+                    ]}
+                    name='checkbox'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                    allCheck
+                />
+                <Pre code={`
+                    <CheckBox
+                    options={[
+                        {label:"英雄联盟",value:"0",disabled:false},
+                        {label:"王者荣耀",value:"1",disabled:false},
+                        {label:"刺激战场",value:"2",disabled:false}
+                    ]}
+                    name='checkbox'
+                    onChange={(name,value)=>{ console.log(name,value) }}
+                    allCheck
+                />
+                `}/>
+            </Panel>
+
             <Panel title='日历组件'>
                 <div>单身狗模式（o(╥﹏╥)o）</div>
                 <Calendar
