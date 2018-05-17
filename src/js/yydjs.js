@@ -134,7 +134,7 @@ function bind(obj,evname,fn){
 };
 
 //取消绑定，可重复取消('事件名称'必须加引号)
-function unBind(obj,evname,fn){
+function unbind(obj,evname,fn){
 	if(obj.removeEventListener){
 		obj.removeEventListener(evname,fn,false);
 	}else{
@@ -1773,7 +1773,7 @@ function slide1(obj,msec,n){
 		iDX1=iDX;
 		iC=Math.abs(iX)-Math.abs(iY);
 
-		iC>0?fn3():unBind(obj,'touchmove',fix);
+		iC>0?fn3():unbind(obj,'touchmove',fix);
 	};
 	function fn3(){
 		if(iDX>0){
@@ -1854,8 +1854,8 @@ function slide3(obj,obj1,styleClass,t){
 		var condition=Math.abs(lDis)-Math.abs(tDis);
 
 		if(condition<0){
-			unBind(obj,'touchmove',fix);
-			unBind(obj1,'touchmove',fix);
+			unbind(obj,'touchmove',fix);
+			unbind(obj1,'touchmove',fix);
 		}else{
 			if(css(obj,'translateX')>=0&&lDis>0||css(obj,'translateX')<=-iW*(iL-1)&&lDis<0){
 				lDis/=3;
@@ -1877,8 +1877,8 @@ function slide3(obj,obj1,styleClass,t){
 		tweenMove(t,obj,{'translateX':-iNow*iW},'linear',function(){
 			iOld=css(obj,'translateX');
 		});
-		unBind(obj,'touchmove',fix);
-		unBind(obj1,'touchmove',fix);
+		unbind(obj,'touchmove',fix);
+		unbind(obj1,'touchmove',fix);
 	};
 
 	function fn(){
@@ -3029,7 +3029,7 @@ export{
 		firstChild,
 		lastChild,
 		bind,
-		unBind,
+		unbind,
 		htmlFontSize,
 		normalDate,
 		dateFormat0,

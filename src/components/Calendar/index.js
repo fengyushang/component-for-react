@@ -112,7 +112,7 @@ export default class Calendar extends React.Component{
     componentWillUnmount(){
         CalendarArr.splice(0,CalendarArr.length);
 
-        bind(document,'click',this.dClickClose);
+        unbind(document,'click',this.dClickClose);
     }
 
     dClickClose(ev){
