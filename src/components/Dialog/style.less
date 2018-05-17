@@ -1,0 +1,97 @@
+@import '~css/index.less';
+@import '~components/style/color.less';
+
+.Dialog{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.6);
+	left: 0;
+	top: -999999px;
+	position: fixed;
+	z-index: -99999;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	.DialogWrap{
+		width: 400px;
+		padding: 20px;
+		left: 50%;
+		top: 50%;
+		transform: translate3d(-50%,-50%,0) scale(0,0);
+		-webkit-transform: translate3d(-50%,-50%,0) scale(0,0);
+		background-color: #fff;
+		position: absolute;
+		.title{
+			width: 100%;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			span{
+				font-size: 16px;
+				color: @main-font;
+			}
+			em{
+				float: right;
+				height: 100%;
+				cursor: pointer;
+			}
+			.iconfont{
+				font-size: 16px;
+				color: @grey-button-bac;
+			}
+		}
+		.main{
+			width: 100%;
+			padding: 20px 0;
+			line-height: 24px;
+			position: relative;
+		}
+		.end{
+			width: 100%;
+			text-align: center;
+			overflow: hidden;
+			span{
+				display: inline-block;
+				width: 48%;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				background-color: @grey-button-bac;
+				color: #fff;
+				cursor: pointer;
+				&:nth-of-type(1){
+					margin-right: 2%;
+				}
+				&:nth-of-type(2){
+					margin-left: 2%;
+					background-color: @blue-button-bac;
+				}
+			}
+		}
+	}
+	&.active{
+		top: 0;
+		z-index: 99999;
+		opacity: 1;
+		filter: alpha(opacity=100);
+		.DialogWrap{
+			transform: translate3d(-50%,-50%,0) scale(1,1);
+			-webkit-transform: translate3d(-50%,-50%,0) scale(1,1);
+		}
+	}
+	&.DialogAnimation{
+		transition: .2s all linear .1s;
+		-webkit-transition: .2s all linear .1s;
+		.DialogWrap{
+			transition: .1s all linear 0s;
+			-webkit-transition: .1s all linear 0s;
+		}
+		&.active{
+			transition: .2s opacity linear 0s;
+			-webkit-transition: .2s opacity linear 0s;
+			.DialogWrap{
+				transition: .1s all linear .2s;
+				-webkit-transition: .1s all linear .2s;
+			}
+		}
+	}
+}

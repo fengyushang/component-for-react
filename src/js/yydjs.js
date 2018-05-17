@@ -3074,4 +3074,6 @@ export{
 		HasClass,
 		manyDay,
 		Scroll,
+		cBub,
+		pDef,
 	};

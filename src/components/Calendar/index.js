@@ -1,7 +1,7 @@
 import React from 'react';
 import {autobind} from 'core-decorators';
 import PropTypes from 'prop-types';
-import {toTwo,manyDay,normalDate,dateFormat0,Scroll} from 'js/yydjs';
+import {toTwo,manyDay,normalDate,dateFormat0,Scroll,bind,unbind} from 'js/yydjs';
 import CalendarArr from './CalendarArr';
 import './style.less';
 
@@ -74,6 +74,7 @@ export default class Calendar extends React.Component{
             endTime:'',
             showCalendar:false,
         };
+
         this.date={
             year:'0000',
             month:'00',
@@ -83,6 +84,7 @@ export default class Calendar extends React.Component{
             minutes:'00',
             seconds:'00',
         };
+        this.Calendar=null;
         this.hoursWrap1=null;
         this.minutesWrap1=null;
         this.secondsWrap1=null;
@@ -103,15 +105,34 @@ export default class Calendar extends React.Component{
         this.createDay(1);
         this.createDay(2);
         this.createTime();
+
+        bind(document,'click',this.dClickClose);
     }
 
     componentWillUnmount(){
         CalendarArr.splice(0,CalendarArr.length);
+
+        bind(document,'click',this.dClickClose);
+    }
+
+    dClickClose(ev){
+        let {target}=ev;
+
+        if(!this.Calendar.contains(target)){
+            this.closeSelf();
+        }
+    }
+
+    closeSelf(){
+        this.setState({
+            selectTime:false,
+            showCalendar:false,
+        });
     }
 
     closeAll(){
-        for(let value of CalendarArr){
-            value.setState({
+        for(let This of CalendarArr){
+            This.setState({
                 selectTime:false,
                 showCalendar:false,
             });
@@ -517,7 +538,7 @@ export default class Calendar extends React.Component{
         const {single,format,startText,endText,startDate,endDate,update}=this.props;
 
         return(
-            <div className={'Calendar'+(single?' single':'')}>
+            <div ref={(dom)=>{this.Calendar=dom}} className={'Calendar'+(single?' single':'')}>
                 <div
                     className="CalendarSelect"
                     onClick={(ev)=>{

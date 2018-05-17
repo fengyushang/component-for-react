@@ -8,6 +8,9 @@ import Pre from 'components/Pre';
 import {autobind} from 'core-decorators';
 import Radio from 'components/Radio';
 import Calendar from 'components/Calendar';
+import Alert from 'components/Alert';
+import Confirm from 'components/Confirm';
+import Dialog from 'components/Dialog';
 import './style.less';
 
 @autobind
@@ -19,7 +22,10 @@ export default class RightContent extends React.Component {
         current: 1,
         demo: '1',
         demo2: '1',
-        radio:''
+        radio:'',
+        show1:false,
+        show2:false,
+        show3:false,
 
     };
     change(name, value) {
@@ -27,7 +33,7 @@ export default class RightContent extends React.Component {
     }
 
     render() {
-        const {input1, total, pageSize, current, demo, demo2,radio} = this.state;
+        const {input1, total, pageSize, current, demo, demo2,radio,show1,show2,show3} = this.state;
         return <div className='home-page'>
             <Panel title='按钮' className='rightContent'>
                 <Button label="确定" sureBtn/>
@@ -275,6 +281,128 @@ export default class RightContent extends React.Component {
                         }}
                     />`
                 }/>
+            </Panel>
+            <Panel title='弹窗组件'>
+                <div>alert</div>
+                <button
+                    onClick={(ev)=>{this.setState({
+                        show1:true,
+                    })}}
+                    type="button"
+                >
+                    显示alert
+                </button>
+                <Pre code={
+                    `
+                        <Alert
+                        parent={this}
+                        state="show1"
+                        show={show1}
+                        title="我是第一个弹窗"
+                        content="我是第一个弹窗的内容"
+                        confirm={()=>{console.log('第一个弹窗被点击了')}}
+                        button="确定"
+                        />
+                    `
+                }/>
+                <br/>
+
+                <div>confirm</div>
+                <button
+                    onClick={(ev)=>{this.setState({
+                        show2:true,
+                    })}}
+                    type="button"
+                >
+                    显示confirm
+                </button>
+                <Pre code={
+                    `
+                        <Confirm
+                            parent={this}
+                            state="show2"
+                            show={show2}
+                            title="修改密码"
+                            content={<h1>我是内容</h1>}
+                            confirm={()=>{console.log('确定')}}
+                            cancel={()=>{console.log('取消')}}
+                            lButton="取消"
+                            rButton="确定"
+                        />
+                    `
+                }/>
+                <br/>
+
+                <div>dialog（自定义弹窗）</div>
+                <button
+                    onClick={(ev)=>{this.setState({
+                        show3:true,
+                    })}}
+                    type="button"
+                >
+                    显示dialog
+                </button>
+                <Pre code={
+                    `
+                        <Dialog
+                            parent={this}
+                            state="show3"
+                            showDialog={show3}
+                            title="修改密码"
+                            showClose={true}
+                            maskClose={true}
+                        >
+                           <div className="main">
+                                   主体内容
+                           </div>
+
+                           <div className="end">
+                               <span>取消</span>
+                               <span>确定</span>
+                           </div>
+                        </Dialog>
+                    `
+                }/>
+
+                <Alert
+                    parent={this}
+                    state="show1"
+                    show={show1}
+                    title="我是第一个弹窗"
+                    content="我是第一个弹窗的内容"
+                    confirm={()=>{console.log('第一个弹窗被点击了')}}
+                    button="确定"
+                />
+
+                <Confirm
+                    parent={this}
+                    state="show2"
+                    show={show2}
+                    title="修改密码"
+                    content={<h1>我是内容</h1>}
+                    confirm={()=>{console.log('确定')}}
+                    cancel={()=>{console.log('取消')}}
+                    lButton="取消"
+                    rButton="确定"
+                />
+
+                <Dialog
+                    parent={this}
+                    state="show3"
+                    showDialog={show3}
+                    title="修改密码"
+                    showClose={true}
+                    maskClose={true}
+                >
+                   <div className="main">
+                           主体内容
+                   </div>
+
+                   <div className="end">
+                       <span>取消</span>
+                       <span>确定</span>
+                   </div>
+                </Dialog>
             </Panel>
         </div>
     }
