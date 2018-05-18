@@ -122,7 +122,7 @@ export default class Autoplay extends React.Component{
 
         bind(obj,'touchstart',start);
         function start(ev){
-            var ev=ev||event;
+            var ev=ev||window.event;
             This.clearTimer();
             iLeft=ev.changedTouches[0].pageX;
             iTop=ev.changedTouches[0].pageY;
@@ -135,7 +135,7 @@ export default class Autoplay extends React.Component{
 
         bind(obj,'touchmove',move);
         function move(ev){
-            var ev=ev||event;
+            var ev=ev||window.event;
             lDis=ev.changedTouches[0].pageX-iLeft;
             tDis=ev.changedTouches[0].pageY-iTop;
             var condition=Math.abs(lDis)-Math.abs(tDis);
