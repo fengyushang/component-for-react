@@ -1839,7 +1839,7 @@ function slide3(obj,obj1,styleClass,t){
 
 		iLeft=ev.changedTouches[0].pageX;
 		iTop=ev.changedTouches[0].pageY;
-		oTime=Date.now();
+		oTime=+new Date();
 
 		iOld=css(obj,'translateX');
 		bind(obj,'touchmove',fix);
@@ -1866,7 +1866,7 @@ function slide3(obj,obj1,styleClass,t){
 
 	bind(obj,'touchend',fn4);
 	function fn4(){
-		var tDis=Date.now()-oTime;
+		var tDis=+new Date()-oTime;
 
 		if(Math.abs(lDis/iW)>0.3||tDis<300&&Math.abs(lDis)>30){
 			lDis<0?iNow++:iNow--;
@@ -3078,5 +3078,4 @@ export{
 		pDef,
 		tweenMove,
 		css,
-
 	};

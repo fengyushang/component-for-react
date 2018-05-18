@@ -88,10 +88,19 @@ export default class TestYyd extends React.Component{
                 </button>
                 <br/>
                 <Autoplay
-                    dataList={dataList}
-                    auto={true}
-                    frequency={3000}
-                    height="200px"
+                    dataList={[
+                            {
+                                src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526550365699&di=05e48c925316cf2870ebfb3d0b17922a&imgtype=0&src=http%3A%2F%2Fimage.tupian114.com%2F20151022%2F17350163.jpg',
+                            },
+                            {
+                                src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526550409291&di=e0896e74ed0850746dcda02a7328436e&imgtype=0&src=http%3A%2F%2Fimage.tupian114.com%2F20120407%2F16415077.jpg',
+                            },
+                            {
+                                src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526550432091&di=ac6285218ef009677f4f5c96c39b635e&imgtype=0&src=http%3A%2F%2Fimage.tupian114.com%2F20151022%2F12420249.jpg',
+                            },
+                        ]}
+                    width="500px"
+                    height="300px"
                 />
 
                 <Alert

@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import PARAMS from './config.js';
 import IconFont from 'components/IconFont';
- 
+
 import './style.less';
 
 export default class SideBar extends Component{
