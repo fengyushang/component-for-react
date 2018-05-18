@@ -26,7 +26,7 @@ export default class Autoplay extends React.Component{
             }]
         */
         auto:true,//是否自动播放
-        width:'100%',//容器宽度
+        width:document.documentElement.clientWidth+'px',//容器宽度
         height:'300px',//容器高度
         t:5000,//轮播间隔
         t1:1000,//轮播滚动时间
