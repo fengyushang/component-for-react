@@ -2,7 +2,7 @@ import React from 'react';
 import {autobind} from 'core-decorators';
 import PropTypes from 'prop-types';
 import {getStyle,bind,unbind,pDef,tweenMove,css,yydTimer} from 'js/yydjs';
-import './style.less';
+import './style.scss';
 
 @autobind
 export default class Autoplay extends React.Component{
@@ -67,6 +67,7 @@ export default class Autoplay extends React.Component{
         this.timer1=null;
         this.iNow=0;
         this.onOff=true;
+        this.exist=true;
     }
 
     componentDidMount(){
@@ -78,8 +79,9 @@ export default class Autoplay extends React.Component{
     }
 
     componentWillUnmount(){
+        this.exist=false;
         this.clearTimer();
-        this.clearTimer1();
+        clearTimeout(this.timer1);
     }
 
     startExecute(){
@@ -185,6 +187,7 @@ export default class Autoplay extends React.Component{
 
         if(autoBool)auto();
         function auto(){
+            if(!This.exist)return clearTimeout(This.timer1);
             This.clearTimer();
             yydTimer(function(clear){
                 This.clearTimer=clear;
@@ -206,7 +209,9 @@ export default class Autoplay extends React.Component{
             index=iNow%(iL/2);
             if(This.iNow!=index){
                 This.iNow=index;
-                This.setNow(This,index);
+                if(This.exist){
+                    This.setNow(This,index)
+                }
             }
         };
     }
