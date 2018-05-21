@@ -2,14 +2,13 @@ import React from 'react';
 import {autobind} from 'core-decorators';
 import PropTypes from 'prop-types';
 import {getStyle,bind,unbind,pDef,tweenMove,css,yydTimer} from 'js/yydjs';
-import './style.scss';
+import './style.less';
 
 @autobind
 export default class Autoplay extends React.Component{
     static propTypes={
         dataList:PropTypes.array,
         auto:PropTypes.bool,
-        width:PropTypes.string,
         height:PropTypes.string,
         t:PropTypes.number,
         t1:PropTypes.number,
@@ -26,7 +25,6 @@ export default class Autoplay extends React.Component{
             }]
         */
         auto:true,//是否自动播放
-        width:document.documentElement.clientWidth+'px',//容器宽度
         height:'300px',//容器高度
         t:5000,//轮播间隔
         t1:1000,//轮播滚动时间
@@ -47,7 +45,6 @@ export default class Autoplay extends React.Component{
                         src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526550432091&di=ac6285218ef009677f4f5c96c39b635e&imgtype=0&src=http%3A%2F%2Fimage.tupian114.com%2F20151022%2F12420249.jpg',
                     },
                 ]}
-            width="500px"
             height="300px"
         />
     */
@@ -224,7 +221,7 @@ export default class Autoplay extends React.Component{
 
     calcWidth(length=1){
         if(this.Autoplay){
-            let iW=parseInt(getStyle(this.Autoplay,'width'));
+            let iW=this.Autoplay.offsetWidth||parseInt(getStyle(this.Autoplay,'width'));
 
             return iW*length;
         }
@@ -233,14 +230,14 @@ export default class Autoplay extends React.Component{
     }
 
     render(){
-        const {dataList,auto,frequency,width,height}=this.props;
+        const {dataList,auto,frequency,height}=this.props;
         const {iW,iNow}=this.state;
         const dataList1=[].concat(dataList,dataList);
 
         this.iW=iW;
 
         return(
-            <div style={{width,height}} ref={(dom)=>{this.Autoplay=dom}} className="Autoplay">
+            <div style={{height}} ref={(dom)=>{this.Autoplay=dom}} className="Autoplay">
                 <div className="AutoplayScroll">
                     <ul
                         ref={(dom)=>{this.AutoplayWrap=dom}}
