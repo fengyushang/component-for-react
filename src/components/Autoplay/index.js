@@ -1,8 +1,8 @@
 import React from 'react';
 import {autobind} from 'core-decorators';
 import PropTypes from 'prop-types';
-import {getStyle,bind,unbind,pDef,tweenMove,css,yydTimer} from 'js/yydjs';
-import './style.less';
+import {getStyle,bind,unbind,pDef,tweenMove,css} from 'js/yydjs';
+import './style.scss';
 
 @autobind
 export default class Autoplay extends React.Component{
@@ -60,7 +60,7 @@ export default class Autoplay extends React.Component{
         this.Autoplay=null;
         this.AutoplayWrap=null;
         this.AutoplayDotWrap=null;
-        this.clearTimer=()=>{};
+        this.timer=null;
         this.timer1=null;
         this.iNow=0;
         this.onOff=true;
@@ -77,7 +77,7 @@ export default class Autoplay extends React.Component{
 
     componentWillUnmount(){
         this.exist=false;
-        this.clearTimer();
+        clearInterval(this.timer);
         clearTimeout(this.timer1);
     }
 
@@ -120,7 +120,7 @@ export default class Autoplay extends React.Component{
         bind(obj,'touchstart',start);
         function start(ev){
             var ev=ev||window.event;
-            This.clearTimer();
+            clearInterval(This.timer);
             iLeft=ev.changedTouches[0].pageX;
             iTop=ev.changedTouches[0].pageY;
             oTime=+new Date();
@@ -177,7 +177,7 @@ export default class Autoplay extends React.Component{
         bind(document,'touchmove',goOn);
         bind(document,'touchend',goOn);
         function goOn(){
-            This.clearTimer();
+            clearInterval(This.timer);
             clearTimeout(This.timer1);
             if(autoBool)This.timer1=setTimeout(auto,t3);
         };
@@ -185,9 +185,8 @@ export default class Autoplay extends React.Component{
         if(autoBool)auto();
         function auto(){
             if(!This.exist)return clearTimeout(This.timer1);
-            This.clearTimer();
-            yydTimer(function(clear){
-                This.clearTimer=clear;
+            clearInterval(This.timer);
+            This.timer=setInterval(function(){
                 iNow++;
                 judge();
                 tweenMove(t1,obj,{'translateX':-iNow*This.iW},moveType);
