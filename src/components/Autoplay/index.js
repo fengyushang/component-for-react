@@ -79,6 +79,7 @@ export default class Autoplay extends React.Component{
         this.exist=false;
         clearInterval(this.timer);
         clearTimeout(this.timer1);
+        unbind(window,'resize',this.setWidth);
     }
 
     startExecute(){
@@ -86,16 +87,18 @@ export default class Autoplay extends React.Component{
             if(!this.onOff)return;
             this.onOff=false;
             const {auto,t,t1,t2,t3}=this.props;
-            const setWidth=()=>{
-                this.setState({
-                    iW:this.calcWidth(),
-                });
-            };
-            setWidth();
-            bind(window,'resize',setWidth);
+
+            this.setWidth();
+            bind(window,'resize',this.setWidth);
             this.startAutoplay(this.AutoplayWrap,this.AutoplayDotWrap,'active','linear',auto,t,t1,t2,t3);
         }
     }
+
+    setWidth(){
+        this.setState({
+            iW:this.calcWidth(),
+        });
+    };
 
     startAutoplay(obj,obj1,styleClass,moveType,autoBool,t,t1,t2,t3){
         var This=this;
