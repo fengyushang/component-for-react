@@ -83,14 +83,16 @@ export default class Autoplay extends React.Component{
     }
 
     startExecute(){
-        if(this.props.dataList&&this.props.dataList.length){
+        let {dataList}=this.props;
+
+        if(dataList&&dataList.length){
             if(!this.onOff)return;
             this.onOff=false;
             const {auto,t,t1,t2,t3}=this.props;
 
             this.setWidth();
             bind(window,'resize',this.setWidth);
-            this.startAutoplay(this.AutoplayWrap,this.AutoplayDotWrap,'active','linear',auto,t,t1,t2,t3);
+            if(dataList.length>1)this.startAutoplay(this.AutoplayWrap,this.AutoplayDotWrap,'active','linear',auto,t,t1,t2,t3);
         }
     }
 
@@ -256,13 +258,16 @@ export default class Autoplay extends React.Component{
                     </ul>
                 </div>
 
-                <div className="AutoplayDotWrap">
-                    <ol ref={(dom)=>{this.AutoplayDotWrap=dom}}>
-                        {dataList.map((item,index)=>(
-                            <li index={index} className={index==iNow?'active':''} key={index}></li>
-                        ))}
-                    </ol>
-                </div>
+                {
+                    dataList&&dataList.length>1&&
+                    <div className="AutoplayDotWrap">
+                        <ol ref={(dom)=>{this.AutoplayDotWrap=dom}}>
+                            {dataList.map((item,index)=>(
+                                <li index={index} className={index==iNow?'active':''} key={index}></li>
+                            ))}
+                        </ol>
+                    </div>
+                }
             </div>
         )
     }
