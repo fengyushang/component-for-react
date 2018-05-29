@@ -2,7 +2,7 @@ import React from 'react';
 import {autobind} from 'core-decorators';
 import PropTypes from 'prop-types';
 import {getStyle,bind,unbind,pDef,tweenMove,css} from 'js/yydjs';
-import './style.scss';
+import './style.less';
 
 @autobind
 export default class Autoplay extends React.Component{
