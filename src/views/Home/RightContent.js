@@ -38,7 +38,9 @@ export default class RightContent extends React.Component {
     change(name, value) {
         this.setState({[name]: value});
     }
-
+    onSubmit(data){
+        console.log(data);
+    }
 
     render() {
         const {input1, total, pageSize, current, demo, demo2,radio,show1,show2,show3} = this.state;
@@ -544,7 +546,37 @@ export default class RightContent extends React.Component {
                                                      }
                                                  }}/>
                                 </Col>
-
+                                <Col md={6}>
+                                    <FormControl component={CheckBox}
+                                                 name='hobby'
+                                                 label='爱好'
+                                                 required
+                                                 controlProps={{
+                                                     options: [
+                                                         {label:"英雄联盟",value:"1"},
+                                                         {label:"王者荣耀",value:"2"},
+                                                     ]
+                                                 }}/>
+                                </Col>
+                                <Col md={6}>
+                                    <FormControl component={Radio}
+                                                 name='country'
+                                                 label='国家'
+                                                 required
+                                                 controlProps={{
+                                                     config: {
+                                                         options: [
+                                                             {
+                                                                 label: '中国',
+                                                                 value: 1
+                                                             }, {
+                                                                 label: '其他',
+                                                                 value: 2
+                                                             }
+                                                         ]
+                                                     }
+                                                 }}/>
+                                </Col>
                             </Row>
                         </Form>
                     </Col>
