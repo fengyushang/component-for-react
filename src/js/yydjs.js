@@ -134,7 +134,7 @@ function bind(obj,evname,fn){
 };
 
 //取消绑定，可重复取消('事件名称'必须加引号)
-function unBind(obj,evname,fn){
+function unbind(obj,evname,fn){
 	if(obj.removeEventListener){
 		obj.removeEventListener(evname,fn,false);
 	}else{
@@ -1348,7 +1348,7 @@ function tweenMove(time,obj,json,type,endFn){
 				clearInterval(obj.timer);
 				endFn&&endFn.call(obj);
 			}
-		},20);
+		},1000/60);
 	}
 };
 
@@ -1773,7 +1773,7 @@ function slide1(obj,msec,n){
 		iDX1=iDX;
 		iC=Math.abs(iX)-Math.abs(iY);
 
-		iC>0?fn3():unBind(obj,'touchmove',fix);
+		iC>0?fn3():unbind(obj,'touchmove',fix);
 	};
 	function fn3(){
 		if(iDX>0){
@@ -1839,7 +1839,7 @@ function slide3(obj,obj1,styleClass,t){
 
 		iLeft=ev.changedTouches[0].pageX;
 		iTop=ev.changedTouches[0].pageY;
-		oTime=Date.now();
+		oTime=+new Date();
 
 		iOld=css(obj,'translateX');
 		bind(obj,'touchmove',fix);
@@ -1854,8 +1854,8 @@ function slide3(obj,obj1,styleClass,t){
 		var condition=Math.abs(lDis)-Math.abs(tDis);
 
 		if(condition<0){
-			unBind(obj,'touchmove',fix);
-			unBind(obj1,'touchmove',fix);
+			unbind(obj,'touchmove',fix);
+			unbind(obj1,'touchmove',fix);
 		}else{
 			if(css(obj,'translateX')>=0&&lDis>0||css(obj,'translateX')<=-iW*(iL-1)&&lDis<0){
 				lDis/=3;
@@ -1866,7 +1866,7 @@ function slide3(obj,obj1,styleClass,t){
 
 	bind(obj,'touchend',fn4);
 	function fn4(){
-		var tDis=Date.now()-oTime;
+		var tDis=+new Date()-oTime;
 
 		if(Math.abs(lDis/iW)>0.3||tDis<300&&Math.abs(lDis)>30){
 			lDis<0?iNow++:iNow--;
@@ -1877,8 +1877,8 @@ function slide3(obj,obj1,styleClass,t){
 		tweenMove(t,obj,{'translateX':-iNow*iW},'linear',function(){
 			iOld=css(obj,'translateX');
 		});
-		unBind(obj,'touchmove',fix);
-		unBind(obj1,'touchmove',fix);
+		unbind(obj,'touchmove',fix);
+		unbind(obj1,'touchmove',fix);
 	};
 
 	function fn(){
@@ -3029,8 +3029,9 @@ export{
 		firstChild,
 		lastChild,
 		bind,
-		unBind,
+		unbind,
 		htmlFontSize,
+		normalDate,
 		dateFormat0,
 		alerts,
 		soleString32,
@@ -3072,4 +3073,9 @@ export{
 		getPos,
 		HasClass,
 		manyDay,
+		Scroll,
+		cBub,
+		pDef,
+		tweenMove,
+		css,
 	};

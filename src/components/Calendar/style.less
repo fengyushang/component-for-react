@@ -1,5 +1,5 @@
 @import '~css/index.less';
-@import '~css/public.less';
+@import '~components/style/color.less';
 
 .Calendar{
     width: 400px;
@@ -7,8 +7,9 @@
     padding-left: 36px;
     height: 32px;
     line-height: 20px;
-    border: 1px solid @inNormalB;
+    border: 1px solid @input-default-border;
     background-color: #fff;
+    color: @main-font;
     position: relative;
     .CalendarSelect{
         width: 100%;
@@ -18,7 +19,7 @@
             height: 100%;
             line-height: 32px;
             font-size: 16px;
-            color: @btNormal1;
+            color: @blue-button-bac;
             position: absolute;
             left: 0;
             top: 0;
@@ -53,18 +54,23 @@
     }
     .CalendarOption{
         width: 600px;
-        border: 1px solid @inNormalB;
+        border: 1px solid @input-default-border;
         background-color: #fff;
         position: absolute;
         left: -1px;
         top: 32px;
+        z-index: 100;
         user-select: none;
         -webkit-user-select: none;
+        display: none;
+        &.active{
+            display: block;
+        }
         .CalendarTitle{
             width: 100%;
             height: 50px;
             line-height: 49px;
-            border-bottom: 1px solid @inNormalB;
+            border-bottom: 1px solid @input-default-border;
             >span{
                 float: left;
                 width: 50%;
@@ -88,27 +94,36 @@
             }
         }
         .CalendarMain{
-            .yearSelect{
+            .yearSelectWrap{
                 width: 100%;
                 height: 50px;
                 line-height: 49px;
-                border-bottom: 1px solid @inNormalB;
+                border-bottom: 1px solid @input-default-border;
+                .yearSelectLeft{
+                    float: left;
+                }
+                .yearSelectRight{
+                    float: right;
+                }
                 .iconfont{
                     font-size: 12px;
-                    color: @fontMain;
+                    color: @main-font;
                     margin: 20px;
                     cursor: pointer;
+                    &.disabled{
+                        cursor: no-drop;
+                    }
                 }
             }
             .daySelectWrap{
                 width: 100%;
-                border-bottom: 1px solid @inNormalB;
+                border-bottom: 1px solid @input-default-border;
                 overflow: hidden;
                 .daySelect{
                     float: left;
                     width: 50%;
                     padding: 10px;
-                    border-right: 1px solid @inNormalB;
+                    border-right: 1px solid @input-default-border;
                     span{
                         float: left;
                         width: 14.2857%;
@@ -119,19 +134,93 @@
                             cursor: pointer;
                         }
                         &.lastMonth,&.nextMonth{
-                            color: @fontMinor;
+                            color: @grey-button-bac;
+                            cursor: no-drop;
                         }
                         &.select{
                             color: #fff;
-                            background-color: @btNormal1;
+                            background-color: @blue-button-bac;
                         }
                         &.across{
-                            background-color: @btDisabled1;
+                            background-color: @blue-button-bac-undo;
                         }
                     }
                 }
                 .daySelectRight{
                     border-right-color: transparent;
+                }
+            }
+            .timeSelectWrap{
+                width: 100%;
+                background-color: #fff;
+                border-bottom: 1px solid @input-default-border;
+                position: absolute;
+                left: 0;
+                top: 50px;
+                display: none;
+                &.active{
+                    display: block;
+                }
+                .timeSelectTitle{
+                    width: 100%;
+                    height: 50px;
+                    line-height: 49px;
+                    border-bottom: 1px solid @input-default-border;
+                    span{
+                        float: left;
+                        width: 50%;
+                        text-align: center;
+                    }
+                }
+                .timeSelectMain{
+                    width: 100%;
+                    text-align: center;
+                    .timeSelect{
+                        float: left;
+                        width: 50%;
+                        border-right: 1px solid @input-default-border;
+                        &.timeSelectRight{
+                            border-right-color: transparent;
+                        }
+                        .timeTitle{
+                            width: 100%;
+                            height: 50px;
+                            line-height: 49px;
+                            border-bottom: 1px solid @input-default-border;
+                            span{
+                                float: left;
+                                width: 33.333%;
+                            }
+                        }
+                        .timeMain{
+                            >ul{
+                                float: left;
+                                width: 33.333%;
+                                height: 180px;
+                                overflow-y: scroll;
+                                border-right: 1px solid @input-default-border;
+                                position: relative;
+                                &:last-of-type{
+                                    border-right-color: transparent;
+                                }
+                                li{
+                                    width: 100%;
+                                    height: 40px;
+                                    line-height: 40px;
+                                    &:last-of-type{
+                                        margin-bottom: 140px;
+                                    }
+                                    &:hover{
+                                        background-color: @select-bac;
+                                    }
+                                    &.active{
+                                        background-color: @blue-button-bac;
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -140,30 +229,69 @@
             padding: 8px 20px;
             height: 50px;
             line-height: 32px;
-            .selectTime{
+            .selectTime,.returnDate{
                 float: left;
-                color: @fontMinor;
+                color: @grey-button-bac;
                 cursor: pointer;
+            }
+            .returnDate{
+                color: @blue-button-bac;
             }
             .buttonWrap{
                 float: right;
-                button{
+                >button{
                     float: left;
                     width: 96px;
+                    margin: 0;
                     margin-left: 10px;
                     height: 32px;
                     line-height: 30px;
-                    border: 1px solid @inNormalB;
+                    border: 1px solid @input-default-border;
                     border-radius: 5px;
-                    color: @fontMinor;
+                    color: @grey-button-bac;
                     background-color: #fff;
                     cursor: pointer;
                     &.CalendarConfirm{
                         color: #fff;
-                        border-color: @btHover1;
-                        background-color: @btHover1;
+                        border-color: @blue-button-bac-hover;
+                        background-color: @blue-button-bac-hover;
                     }
                 }
+            }
+        }
+    }
+    &.single{
+        width: 200px;
+        .CalendarSelect .CalendarPick > span{
+            width: 100%;
+            padding: 0;
+        }
+        .CalendarOption{
+            width: 300px;
+            .CalendarTitle > span{
+                width: 100%;
+            }
+            .CalendarMain{
+                .daySelectWrap .daySelect{
+                    width: 100%;
+                }
+                .timeSelectWrap{
+                    .timeSelectTitle{
+                        display: none;
+                    }
+                    .timeSelectMain .timeSelect{
+                        width: 100%;
+                    }
+                    .timeSelect .timeMain > ul{
+                        height: 230px;
+                        li:last-of-type{
+                            margin-bottom: 190px;
+                        }
+                    }
+                }
+            }
+            .CalendarEnd .buttonWrap button{
+                width: 80px;
             }
         }
     }

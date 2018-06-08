@@ -9,3 +9,18 @@
 //     padding:0;
 //     list-style: none;
 // }
+.clearfix{
+    zoom:1;
+    &:after{
+        clear: both;
+        overflow: hidden;
+        content:'';
+        height:0;
+    }
+}
+.iconfont{
+    &:before{
+        display: inline-block;
+    }
+    
+}
