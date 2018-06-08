@@ -7,7 +7,7 @@ import './input.less';
 export default class Input extends React.Component {
     static props = {
         name: propTypes.string.isRequired,
-        value: propTypes.string.isRequired,
+        value: propTypes.any.isRequired,
         onChange: propTypes.func.isRequired,
         onBlur: propTypes.func,
         disabled: propTypes.bool,
@@ -15,6 +15,7 @@ export default class Input extends React.Component {
         unit: propTypes.string,
         type: propTypes.string,
         placeholder: propTypes.string,
+        maxLength: propTypes.number,
     };
     static defaultProps = {
         disabled: false,
@@ -22,6 +23,7 @@ export default class Input extends React.Component {
         unit: '',
         type: 'text',
         placeholder: '',
+        maxLength: 5000,
     };
     inputChange(e){
         const {name,onChange} = this.props;
@@ -35,7 +37,7 @@ export default class Input extends React.Component {
 
     }
     render() {
-        const {name, value, disabled, error, unit, type, placeholder} = this.props;
+        const {name, value, disabled, error, unit, type, placeholder,maxLength} = this.props;
         return <div className={'input-component'+(error?' input-error':'')}>
             <div>
                 <input name={name}
@@ -45,8 +47,9 @@ export default class Input extends React.Component {
                        onBlur={this.inputBlur}
                        disabled={disabled}
                        placeholder={placeholder}
+                       maxLength={maxLength}
                 />
-                { unit && <span className='unit' ref={(val)=>this.unitNode = val}>{unit}</span>}
+                { unit && <span className='unit'>{unit}</span>}
             </div>
         </div>
     }

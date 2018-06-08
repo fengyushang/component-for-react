@@ -1,0 +1,74 @@
+@import '../style/size';
+@form-control-margin-bottom: 10px;
+@form-control-label-margin-bottom: 4px;
+@error-info-color: #d9534f;
+@form-label-horizontal-width: 80px;
+.form-control{
+  margin-bottom: @form-control-margin-bottom;
+  font-size: 12px;
+  .control-label{
+    margin-bottom: @form-control-label-margin-bottom;
+    .required{
+      margin-right: 2px;
+    }
+  }
+  .control-content{
+    >div{
+      display: block;
+      width: 100%;
+    }
+  }
+  .error-info{
+    color: @error-info-color;
+    &.error-info-bottom{
+      margin-top: 3px;
+      height: 16px;
+    }
+    &.error-info-left{
+      display: inline-block;
+      margin-left: 10px;
+    }
+    &.error-info-right{
+      display: inline-block;
+      float: right;
+    }
+  }
+  &.horizontal{
+    position: relative;
+    margin-bottom: 2px;
+    .error-info-right, .error-info-left{
+      display: block;
+      float: none;
+      margin-bottom: 2px;
+      height: 16px;
+      & ~ .control-label{
+        top: 16px;
+      }
+    }
+    .error-info-right{
+      text-align: right;
+    }
+    .error-info-left{
+      text-align: left;
+      margin-left: @form-label-horizontal-width + 8px;
+    }
+    .control-label{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: @form-label-horizontal-width;
+      text-align: right;
+      line-height: @input-height;
+      margin-bottom: 0;
+    }
+    .control-content{
+      margin-left: @form-label-horizontal-width + 8px;
+    }
+    &.hide-error-info{
+      margin-bottom: 14px;
+      .control-label{
+        top: 0;
+      }
+    }
+  }
+}

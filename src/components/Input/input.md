@@ -15,3 +15,4 @@
 | unit | 单位 | string | '' | 否 |
 | type | 类型 | string | 'text' | 否 |
 | placeholder | 提示信息 | string | '' | 否 |
+| maxLength | 最大长度 | number | 5000 | 否 |

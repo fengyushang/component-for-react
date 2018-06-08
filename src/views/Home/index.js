@@ -1,7 +1,7 @@
 import React from 'react';
 import 'components/style/main.less';
 import Button from 'components/Button';
-import {message, Input, Pagination, Row, Col, Panel} from '../../components';
+import {message, Input, Pagination, Row, Col, Panel, Form, FormControl} from '../../components';
 import Select, {InputSelect} from 'components/Select';
 import Tipsy from 'components/Tipsy';
 import Pre from 'components/Pre';
@@ -18,9 +18,18 @@ export default class Home extends React.Component {
         demo: '1',
         demo2: '1'
 
-    }
+    };
+
     change(name, value) {
         this.setState({[name]: value});
+    }
+
+    onSubmit(data) {
+        console.log(data);
+    }
+
+    componentDidMount() {
+        this.fHelper.setField('name', 'zhang');
     }
 
     render() {
@@ -193,6 +202,58 @@ export default class Home extends React.Component {
                     </Col>
                     <Col span={3}>
                         <div>3</div>
+                    </Col>
+                </Row>
+            </Panel>
+            <Panel title='Form表单'>
+                <Row gutter={8}>
+                    <Col span={4}>
+                        <Form name='testForm'
+                              onSubmit={this.onSubmit}
+                              getFormHelper={obj => this.fHelper = obj}
+                            // hideRequired
+                            // hideCancelButton
+                            //   hideErrorInfo
+                            //   layout='horizontal'
+                              errorInfoPosition='right'>
+                            <Row gutter={8}>
+                                <Col md={6}>
+                                    <FormControl component={Input}
+                                                 name='name'
+                                                 label='姓名'
+                                                 required
+                                                 controlProps={{maxLength: 20, placeholder: '请输入姓名'}}/>
+                                </Col>
+                                <Col md={6}>
+                                    <FormControl component={Input} name='age' label='年龄'
+                                                 controlProps={{placeholder: '请输入年龄'}}
+                                                 validator={[
+                                                     {rule: /^\d+$/, msg: '数字'}
+                                                 ]}/>
+                                </Col>
+                                <Col md={6}>
+                                    <FormControl component={InputSelect}
+                                                 name='gender'
+                                                 label='性别'
+                                                 required
+                                                 controlProps={{
+                                                     readOnly: true,
+                                                     config: {
+                                                         options: [
+                                                             {
+                                                                 label: '男',
+                                                                 value: 1
+                                                             }, {
+                                                                 label: '女',
+                                                                 value: 2
+                                                             }
+                                                         ]
+                                                     }
+                                                 }}/>
+                                </Col>
+
+                            </Row>
+                        </Form>
                     </Col>
                 </Row>
             </Panel>

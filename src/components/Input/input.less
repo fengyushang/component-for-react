@@ -1,6 +1,5 @@
 @import '../style/size';
 @import '../style/color';
-
 .input-component {
   font-size: 12px;
   display: inline-block;
@@ -13,6 +12,7 @@
   > div {
     display: flex;
     input {
+      font-size: 12px;
       flex: 1;
       height: @input-height;
       border: 1px solid @input-default-border;
@@ -39,5 +39,21 @@
   }
   input[type="number"] {
     -moz-appearance: textfield;
+  }
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: @input-placeholder;
+    font-size: 12px;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: @input-placeholder;
+    font-size: 12px;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: @input-placeholder;
+    font-size: 12px;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: @input-placeholder;
+    font-size: 12px;
   }
 }
