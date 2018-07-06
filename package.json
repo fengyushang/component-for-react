@@ -1,6 +1,6 @@
 {
   "name": "component-for-react",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "component-for-react",
   "main": "lib/components/index.js",
   "scripts": {
