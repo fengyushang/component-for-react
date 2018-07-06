@@ -1,6 +1,6 @@
 {
   "name": "component-for-react",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "component-for-react",
   "main": "lib/components/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/fengyushang/component-for-react.git"
+    "url": "https://github.com/fengyushang/component-for-react"
   },
   "author": "fengyushang",
   "license": "ISC",
