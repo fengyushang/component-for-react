@@ -1,8 +1,8 @@
 {
   "name": "component-for-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "component-for-react",
-  "main": "lib/index.js",
+  "main": "lib/components/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./scripts/server.js",
