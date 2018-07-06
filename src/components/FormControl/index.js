@@ -26,7 +26,8 @@ class ControlItem extends React.Component{
         label: PropTypes.string.isRequired,
         controlProps: PropTypes.object,
         required: PropTypes.bool,
-        validator: PropTypes.array,
+        validator: PropTypes.array,//验证输入内容是否正确
+        parse: PropTypes.func,//限制输入内容
         context: PropTypes.object,
     };
     static defaultProps = {
@@ -38,6 +39,10 @@ class ControlItem extends React.Component{
         errorMsg: '',
     };
     onChange(name,value){
+        const {parse} = this.props;
+        if(parse){
+            value = parse(value);
+        }
         this.props.context.setField(name,value);
     }
     onBlur(name,value){
@@ -88,13 +93,19 @@ class ControlItem extends React.Component{
         const {errorMsg} = this.state;
         const ControlComponent = component;
         return <div className={'form-control '+context.layout+(context.hideErrorInfo ? ' hide-error-info':'')}>
-            <div className={'error-info error-info-'+context.errorInfoPosition}>{(!context.hideErrorInfo && context.submitClickStatus && context.layout==='horizontal') ? errorMsg : ''}</div>
+            <div className={'error-info error-info-'+context.errorInfoPosition}>
+                {(!context.hideErrorInfo && context.submitClickStatus && context.layout==='horizontal') ? errorMsg : ''}
+            </div>
             <div className='control-label'>
                 <label>
-                    {!context.hideRequired && required && <span className='required'>*</span>}
                     {label}
+                    {!context.hideRequired && required && <span className='required'>*</span>}
                 </label>
-                {!context.hideErrorInfo && context.submitClickStatus && context.layout==='vertical' && <div className={'error-info error-info-'+context.errorInfoPosition}>{errorMsg}</div>}
+                {
+                    !context.hideErrorInfo && context.submitClickStatus && context.layout==='vertical'
+                    &&
+                    <div className={'error-info error-info-'+context.errorInfoPosition}>{errorMsg}</div>
+                }
             </div>
             <div className='control-content'>
                 <ControlComponent name={name}
@@ -107,7 +118,3 @@ class ControlItem extends React.Component{
         </div>
     }
 }
-
-const ErrorMessage = (props)=>{
-   return <div className={'error-info error-info-'+props.className}>{props.msg}</div>
-};

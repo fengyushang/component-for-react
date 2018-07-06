@@ -18,7 +18,7 @@ export default class Form extends React.Component {
         confirmButtonText: PropTypes.string,
         cancelFn: PropTypes.func,
         getFormHelper: PropTypes.func,
-        errorInfoPosition: PropTypes.string,
+        errorInfoPosition: PropTypes.string,//left or right
         hideErrorInfo: PropTypes.bool,
     };
     static defaultProps = {
@@ -27,7 +27,7 @@ export default class Form extends React.Component {
         hideCancelButton: false,
         cancelButtonText: '取消',
         confirmButtonText: '确定',
-        errorInfoPosition: 'bottom',
+        errorInfoPosition: 'right',
         hideErrorInfo: false,
     };
     state = {

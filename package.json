@@ -8,11 +8,19 @@
     "start": "node ./scripts/server.js",
     "build": "webpack --config ./scripts/webpack.config.prod.js",
     "clean": "rimraf lib",
-    "move": "cpx src/components/**/*.{js,less,css,md,png,jpg,jpeg} lib/components",
-    "lib": "npm run clean && npm run move && babel lib/components -d lib/components"
+    "moveComponents": "cpx src/components/**/*.{js,less,css,md,png,jpg,jpeg} lib/components",
+    "moveCss": "cpx src/css/* lib/css",
+    "moveJs": "cpx src/js/* lib/js",
+    "lib": "npm run clean && npm run moveComponents && npm run moveCss && npm run moveJs && babel lib/components -d lib/components"
   },
   "files": [
     "lib"
+  ],
+  "keywords": [
+    "component",
+    "react",
+    "react-component",
+    "component-for-react"
   ],
   "repository": {
     "type": "git",

@@ -41,6 +41,9 @@ export default class RightContent extends React.Component {
     onSubmit(data){
         console.log(data);
     }
+    componentDidMount(){
+        this.fHelper.setField('name','qwer')
+    }
 
     render() {
         const {input1, total, pageSize, current, demo, demo2,radio,show1,show2,show3} = this.state;
@@ -506,17 +509,21 @@ export default class RightContent extends React.Component {
                         <Form name='testForm'
                               onSubmit={this.onSubmit}
                               getFormHelper={obj => this.fHelper = obj}
-                            // hideRequired
-                            // hideCancelButton
-                            //   hideErrorInfo
-                            //   layout='horizontal'
-                              errorInfoPosition='right'>
+                              // hideRequired
+                              // hideCancelButton
+                              // hideErrorInfo
+                              layout='horizontal'
+                              // errorInfoPosition='right'
+                        >
                             <Row gutter={8}>
                                 <Col md={6}>
                                     <FormControl component={Input}
                                                  name='name'
                                                  label='姓名'
                                                  required
+                                                 parse={(value)=>{
+                                                     return value.replace(/[^a-z]/g,'');
+                                                 }}
                                                  controlProps={{maxLength: 20, placeholder: '请输入姓名'}}/>
                                 </Col>
                                 <Col md={6}>

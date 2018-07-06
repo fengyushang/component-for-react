@@ -12,13 +12,8 @@ module.exports = {
     output: {
         filename: 'assets/scripts/[name].[hash].bundle.js',
         path: rootPath + '/dist',
-        publicPath: '/'
     },
     plugins: [
-        new CleanWebpackPlugin(rootPath + '/dist', {
-            root: rootPath,
-            verbose: true
-        }),
         new HtmlWebpackPlugin({
             title: Config.title,
             filename: 'index.html',
