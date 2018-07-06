@@ -1,6 +1,6 @@
 {
   "name": "component-for-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "component-for-react",
   "main": "lib/components/index.js",
   "scripts": {
@@ -24,11 +24,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fengyushang/component-for-react.git"
+    "url": "https://github.com/fengyushang/component-for-react.git"
   },
   "author": "fengyushang",
   "license": "ISC",
-  "homepage": "https://github.com/fengyushang/component-for-react#readme",
+  "homepage": "https://github.com/fengyushang/component-for-react",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.2",
