@@ -1,32 +1,32 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import './button';
+import './button.less';
+import IconFont from "../IconFont";
 
-class Button extends Component {
-    
-    static props = {
-        label:PropTypes.string,
-        type:PropTypes.string,
-        sureBtn:PropTypes.bool,
-        cancelBtn:PropTypes.bool,
-        className:PropTypes.string,
+export default class Button extends Component {
+    static propTypes = {
         disabled: PropTypes.bool,
-        onClick:PropTypes.func
+        icon: PropTypes.string,
+        size: PropTypes.string,
+        label: PropTypes.string,
+        type: PropTypes.string,
+        className: PropTypes.string,
+        onClick: PropTypes.func
     };
 
     static defaultProps = {
-        label:'button',
-        type:'button',
+        disabled: false,
+        label: 'button',
+        size: 'default',//large, default, small
+        type: 'default',//primary, default, secondary
     };
 
-    render(){
-        const {label,type,className,disabled,onClick,sureBtn,cancelBtn} = this.props;
-        const clstype = sureBtn ? 'sureBtn ' : (cancelBtn ? 'cancelBtn ' : '');
-        return(
-            <button type={type} disabled={disabled}
-            onClick = {onClick}
-            className={'btn '+clstype+className }>{label}</button>
-        )
+    render() {
+        const {disabled, icon, size, label, type, className, onClick} = this.props;
+        return <button className={`button-component ${className ? className : ''} button-${type} button-${size} ${disabled ? 'disabled ':''}`}
+                       onClick={() => onClick && onClick()}>
+            {icon && <IconFont name={icon}/>}
+            {label}
+        </button>
     }
 }
-export default Button;

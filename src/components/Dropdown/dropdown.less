@@ -1,0 +1,70 @@
+.dropdown{
+  font-size: 14px;
+  display: inline-block;
+  position: relative;
+  >div{
+    cursor: pointer;
+    line-height: 32px;
+    height: 32px;
+    padding: 0 10px;
+    color: #1890ff;
+    >.iconfont{
+      margin-left: 4px;
+      font-size: 14px;
+    }
+    &.border{
+      color: rgba(0,0,0,.65);
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      &:hover{
+        color: #1890ff;
+        border-color: #1890ff;
+      }
+    }
+  }
+  >ul{
+    position: absolute;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(0,0,0,.65);
+    padding: 4px 0;
+    margin: 0;
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    min-width: 100%;
+    li{
+      padding: 5px 12px;
+      margin: 0;
+      clear: both;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(0,0,0,.65);
+      white-space: nowrap;
+      cursor: pointer;
+      -webkit-transition: all .3s;
+      transition: all .3s;
+      line-height: 22px;
+      &:hover, &.active{
+        background-color: #e6f7ff;
+      }
+    }
+    &.bottomLeft{
+      top: 32px;
+      left: 0;
+    }
+    &.bottomRight{
+      top: 32px;
+      right: 0;
+    }
+    &.topLeft{
+      bottom: 32px;
+      left: 0;
+    }
+    &.topRight{
+      bottom: 32px;
+      right: 0;
+    }
+  }
+}

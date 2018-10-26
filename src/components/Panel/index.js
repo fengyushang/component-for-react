@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './panel.less';
 
 export default class Panel extends React.Component{
-    static props = {
+    static propTypes = {
         title: PropTypes.string,
         type: PropTypes.string,
         className: PropTypes.string,

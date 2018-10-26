@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class IconFont extends React.Component {
-    static props = {
+    static propTypes = {
         name:PropTypes.string.isRequired,
         className:PropTypes.string,
         onClick: PropTypes.func,
